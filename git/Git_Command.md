@@ -122,11 +122,10 @@
   - 원격저장소에 커밋내용 저장
   
   ```
-git push 원격저장소이름 브랜치이름
+  git push 원격저장소이름 브랜치이름
   ```
-  
   ```
-git push origin master
+  git push origin master
   ```
 
   - 원격저장소 설정 확인  (+ origin이라는 이름으로 원격저장소가 저장되었다)

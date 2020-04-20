@@ -6,11 +6,11 @@
 - [Algorithm](#Algorithm)
 - [Git](#Git)
 - [DataBase](#DataBase)
-- [Tech Interview](#Tech Interview)
+- [Tech Interview](#TechInterview)
 
 ---
 #### Algorithm​
-- [알고리즘 문제풀이_- 블로그](https://blog.naver.com/kbeeysk)
+- [알고리즘 문제풀이 - 블로그](https://blog.naver.com/kbeeysk)
 - [알고리즘 정리](https://github.com/KOO-YS/TIL/blob/master/algorithm)
 
 
@@ -29,7 +29,7 @@
 
 
 
-#### Tech Interview
+#### TechInterview
 
 - [기술면접 정리](https://github.com/KOO-YS/TIL/blob/master/techInterview)
 

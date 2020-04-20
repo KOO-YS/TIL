@@ -25,7 +25,7 @@
 
 - root 부터 level 1 -> leaf로 갈수록 레벨이 높아진다
 
-
+- 노드의 개수가 N개이면 링크의 개수는 N-1개이며, 루트에서 링크를 타고 어떤 노드로 가는 경로는 유일하다
 
 ### 이진 트리
 
@@ -51,7 +51,7 @@
 
 #### 이진트리의 자료구조
 
-- 규칙이 없기에 LinkedList에 저장
+- 일반적 이진트리는 규칙이 없기에 LinkedList에 저장
 
 - 노드는 왼/오른쪽 자식 주소 + 데이터를 가지고있어야 하고, 필요하다면 부모 노드의 주소도 가진다
 
@@ -66,12 +66,93 @@
    - 후위 순회 (Post-order) : 왼 -> 오 -> 부모
    - 레벨 순회 (Level-order) : 부모 -> 자식(왼~>오)
 
+```JAVA
+class Node{
+		private int data;		// 노드의 데이터값
+		private Node left;		// 왼쪽 자식 노드
+		private Node right;		// 오른쪽 자식 노드
+		
+		public Node(int data){
+			this.data = data;
+		}
+		public Node(int data, Node left, Node right){
+			this.data = data;
+			this.left = left;
+			this.right = right;
+		}
+	
+	public void setData(int data){
+		this.data = data;
+	}
+	public int getData(){
+		return data;
+	} 
+	public void setRight(int data){
+		this.right = new Node(data);
+	}
+	public Node getRight(){
+		return right;
+	}
+	public void setLeft(int data){
+		this.left = new Node(data);
+	}
+	public Node getLeft(){
+		return left;
+	}
+}
+class BinaryTree {
+	private Node root;
+	public BinaryTree(Node root){
+		this.root = root;
+	}
+	
+	// 전위 순회	
+	public void preOrder(Node parent){
+		if(parent == null) return;
+		System.out.print(parent.getData()+" ");
+		preOrder(parent.getLeft());	
+		preOrder(parent.getRight());
+	}
+	// 중위 순회
+	public void inOrder(Node parent){
+		if(parent != null){
+			inOrder(parent.getLeft());
+			System.out.print(parent.getData()+" ");
+			inOrder(parent.getRight());
+		}
+	}
+	// 후위 순회
+	public void postOrder(Node parent){
+		if(parent != null){
+			postOrder(parent.getLeft());
+			postOrder(parent.getRight());
+			System.out.print(parent.getData()+" ");
+		}
+	}
+}
+```
+
+
+
 
 
 ### 이진 검색 트리 (BST : Binary Search Tree)
 
+- 키 x를 가진 노드를 검색하고자 할때, 트리에 해당 노드가 존재하면 해당 노드를 리턴
+  - 검색하고자 하는 값이 루트보다 작을 경우 왼쪽으로 이동
+  - 검색하고자 하는 값이 루트보다 클 경우 오른쪽으로 이동
+
+
+
+#### 삽입
+
+- 새로운 노드를 이진 검색 트리에 추가하는 연산
+- 새로운 노드를 추가할 때 기존의 노드들은 전혀 건드리지 않는다
 - 
 
+#### 삭제
+
+#### 검색
 
 
 
@@ -79,6 +160,16 @@
 
 
 
+- ㅇㅇ
+- 
+
+ 해야할 것
+
+- [ ] 삽입
+
+- [ ] 삭제
+
+- [ ] 최소값 찾기
 
 
 
@@ -86,15 +177,15 @@
 
 
 
-
+https://new93helloworld.tistory.com/113?category=691027
 
 https://new93helloworld.tistory.com/114?category=691027
 
 
 
+https://codingstarter.tistory.com/7?category=935492
 
 
 
-
-
+### 레드 블랙 트리(Red Black Tree)
 

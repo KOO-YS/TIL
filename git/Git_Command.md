@@ -14,7 +14,8 @@
   - 원격저장소의 변경사항 로컬에 연동
 - [gitignore](#gitignore)
   - 원격저장소에 변경사항을 저장하지 않고 무시할 파일 표시
-
+- [Remove](#Remove)
+  - 원격저장소와의 연결 끊기 및 .git 파일 
 ---
 
 
@@ -204,7 +205,19 @@
 
 
 
+## Remove
 
+로컬 저장소와 원격저장소간의 연결을 끊고, '.git'파일을 삭제
+
+- 원격저장소와의 연결 끊기
+  ```
+  git remote remove origin
+  ```
+  
+- .git 파일 삭제 (직접 삭제해도 상관없음)
+  ```
+  find ./ -name ".git" | xargs rm -Rf
+  ```
 
 
 

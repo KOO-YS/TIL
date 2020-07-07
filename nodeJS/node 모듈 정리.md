@@ -110,3 +110,50 @@ cpu 코어 개수만큼 worker 발생시켜 병렬처리 진행
 
 
 
+### dns module 
+
+지정된 도메인의 dns 정보를 알아올 수 있는 모듈
+
+지정된 도메인의 ip 주소 등의 정보를 파악
+
+`lookup` : 지정된 도메인의 정보를 가져온다
+
+[dns.js 소스](https://github.com/KOO-YS/TIL/tree/master/nodeJS/src/dns.js)
+
+
+
+---
+
+
+
+### fs module
+
+파일에 데이터를 쓰고 읽어 올 수 있는 기능을 제공
+
+[fs.js 소스](https://github.com/KOO-YS/TIL/tree/master/nodeJS/src/fs.js)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[*.js 소스](https://github.com/KOO-YS/TIL/tree/master/nodeJS/src/*.js)

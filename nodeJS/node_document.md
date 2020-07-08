@@ -134,26 +134,53 @@ cpu 코어 개수만큼 worker 발생시켜 병렬처리 진행
 
 
 
+---
 
 
 
+### global module
+
+추가적인 모듈 생성없이 기본적으로 사용할 수 있는 기능들을 가지고 있는 모듈 객체
+
+글로벌 모듈 객체는 프로그램 시작과 동시에 생성되며 어디서든 사용이 가능하다
+
+  [global.js 소스](https://github.com/KOO-YS/TIL/tree/master/nodeJS/src/global.js)
 
 
 
+---
 
 
 
+### os module
+
+프로그램이 실행되고 있는 서버 컴퓨터와 관련된 정보를 제공
+
+[os.js 소스](https://github.com/KOO-YS/TIL/tree/master/nodeJS/src/os.js)
 
 
 
+---
 
 
 
+### path module
+
+경로 관련 기능 제공
+
+[path.js 소스](https://github.com/KOO-YS/TIL/tree/master/nodeJS/src/path.js)
 
 
 
+---
 
 
 
+### hppt module
 
-[*.js 소스](https://github.com/KOO-YS/TIL/tree/master/nodeJS/src/*.js)
+http 모듈은 웹 애플리케이션을 개발할 수 있도록 제공되는 모듈
+
+일반적인 웹 서버와 동일하게 동작하는 웹서버 기능 모듈
+
+[http.js 소스](https://github.com/KOO-YS/TIL/tree/master/nodeJS/src/http.js)
+

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ejs file</h1>
+    <!-- <%
+        var date = new Date();
+    %>
+    date : <%=date %> -->
+    str : <%=str%> <br>
+    number : <%=number%> <br>
+    data : <%= date%>
+
+    <br><br><br>
+    <form action="param" method="GET">
+        <h3>parameter GET</h3>
+        data1 : <input type="text" name="data1">
+        data2 : <input type="text" name="data2">
+        <button type="submit">submit</button>
+    </form>
+
+    <br><br><br>
+    <form action="paramP" method="POST">
+        <h3>parameter POST</h3>
+        data1 : <input type="text" name="data1">
+        data2 : <input type="text" name="data2">
+        <button type="submit">submit</button>
+    </form>
+
+    <br><br><br>
+
+    <a href="save_cookie">쿠키 저장</a>
+    <a href="load_cookie">쿠키 로드</a>
+
+    <br><br><br>
+
+    <a href="save_session">세션 저장</a>
+    <a href="load_session">세션 로드</a>
+
+</body>
+</html>

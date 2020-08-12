@@ -226,7 +226,40 @@ G = (V,E)
 - 서로소 집합(Disjoint-Set)
 - 여러개의 노드가 존재할 때 두개의 노드를 선택해서 현재 이 두 노드가 서로 같은 그래프에 속하는지 판별하는 알고리즘
 - 크루스칼 알고리즘의 베이스가 된다
+```
+public static class UnionFind{
+    /**
+     *  부모 노드를 찾는 함수
+     */
+    public int getParent(int[] parent, int x){
+        if(parent[x] == x) return x;
+        return parent[x] = getParent(parent, parent[x]);
+    }
 
+    /**
+     * 두 노드의 부모를 합치는 함수
+     */
+    public int unionParent(int[] parent, int a, int b){
+        a = getParent(parent, a);
+        b = getParent(parent, b);
+        if (a > b){
+            return parent[a] = b;      // 더 작은 값을 기준으로 합친다
+        } else {
+            return parent[b] = a;
+        }
+    }
+
+    /**
+     * 부모 노드가 같은지 확인
+     */
+    public boolean findParent(int[] parent, int a, int b){
+        a = getParent(parent, a);
+        b = getParent(parent, b);
+        if (a == b) return true;
+        return false;
+    }
+}
+```
 
 
 ### DAG (Directed Acyclic Graph)

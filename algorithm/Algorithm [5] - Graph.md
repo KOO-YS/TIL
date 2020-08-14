@@ -233,7 +233,7 @@ G = (V,E)
 
       public static void main(String[] args) {
           int[] parent = new int[11];
-          for(int i=0; i<=10; i++){
+          for(int i=1; i<=10; i++){
               parent[i] = i;
           }
           UnionFind union = new UnionFind();
@@ -377,7 +377,114 @@ G = (V,E)
     1. [노드간의 간선] 정보를 정렬된 순서에 맞게 그래프에 포함시킨다
     2. 포함시키기전 사이클 테이블 확인 (union-find를 이용해 테이블을 확인할 수 있겠다)
     3. 사이클 형성하는 경우 간선을 포함시키지 않는다
+  
+  ```JAVA
 
+    public class Main {
+
+        public static void main(String[] args) {
+            List<Edge> nodes = new ArrayList<>();
+
+            nodes.add(new Edge(1, 7, 12));
+            nodes.add(new Edge(1, 4, 28));
+            nodes.add(new Edge(1, 2, 67));
+            nodes.add(new Edge(1, 5, 17));
+            nodes.add(new Edge(2, 4, 24));
+            nodes.add(new Edge(2, 5, 62));
+            nodes.add(new Edge(3, 5, 20));
+            nodes.add(new Edge(3, 6, 37));
+            nodes.add(new Edge(4, 7, 13));
+            nodes.add(new Edge(5, 6, 45));
+            nodes.add(new Edge(5, 7, 73));
+
+            Collections.sort(nodes);
+
+            int sum = 0;
+
+            UnionFind union = new UnionFind();
+            int[] parent = new int[nodes.size()];
+            for(int i=0; i<parent.length; i++){
+                parent[i] = i;
+            }
+            for(int i=0; i<nodes.size(); i++){
+
+                // 사이클을 형성하지 않을 때(같은 부모를 가지고 있지 않을 때만 연결)
+                if(! union.equalParent(parent, nodes.get(i).nodes[0]-1, nodes.get(i).nodes[1]-1)){
+                    sum += nodes.get(i).distance;
+                    // 간선이 연결되었으니 두 정점의 부모 노드 연결
+                    union.unionParent(parent, nodes.get(i).nodes[0]-1, nodes.get(i).nodes[1]-1);
+                }
+            }
+            System.out.println(sum);
+        }
+    }
+
+    /**
+     * 최소 비용 신장 트리
+     * 가장 적은 비용으로 모든 노드를 연결 ( 간선 개수 : 노드 -1 )
+     * 
+     * 간선을 거리가 짧은 순서로 그래프에 포함시키기 -> 오름차순 정렬후 포함
+     * **주의** 사이클이 형성되어있는 간선은 포함시키지 않기 [결론 : Union Find를 응용한다]
+     */
+    class Kruskal{
+        int[] cycle;
+    }
+    @ToString
+    class Edge implements Comparable<Edge>{
+        int[] nodes = new int[2];        // 연결된 노드 1쌍
+        int distance;       // 간선
+
+        public Edge(int a, int b, int distance) {
+            this.nodes[0] = a;
+            this.nodes[1] = b;
+            this.distance = distance;
+        }
+
+        @Override
+        public int compareTo(Edge o) {
+            if(this.distance == o.distance) return 0;
+            if(this.distance < o.distance) return -1;
+            else return 1;
+        }
+    }
+    /* Union find :
+    *    두 노드가 서로 같은 그래프에 속하는지 판별
+    *   가장 큰/작은 값을 기준으로 분류 + 재귀 사용 -> 같은 부모를 정리
+    * */
+    class UnionFind{
+        /**
+         *  부모 노드를 찾는 함수
+         */
+        public int getParent(int[] parent, int x){
+            if(parent[x] == x) return x;
+            return parent[x] = getParent(parent, parent[x]);
+        }
+
+        /**
+         * 두 노드의 부모를 합치는 함수
+         */
+        public int unionParent(int[] parent, int a, int b){
+            a = getParent(parent, a);
+            b = getParent(parent, b);
+            if (a > b){
+                return parent[a] = b;      // 더 작은 값을 기준으로 합친다
+            } else {
+                return parent[b] = a;
+            }
+        }
+
+        /**
+         * 부모 노드가 같은지 확인
+         */
+        public boolean equalParent(int[] parent, int a, int b){
+            a = getParent(parent, a);
+            b = getParent(parent, b);
+            if (a == b) return true;
+            return false;
+        }
+    }
+
+  ```
     
 
 - 프림 알고리즘

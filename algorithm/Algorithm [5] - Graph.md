@@ -367,51 +367,51 @@ G = (V,E)
           sort.sortOrder();
           System.out.println(sort.result.toString());
       }
-  }
+    }
 
-  /**
-   * 순서가 정해져있는 작업을 차례로 수행해야 할 때, 순서를 결정하기 위해 사용하는 알고리즘
-   * 진입차수 : 노드로 들어오는 간선의 개수
-   * 위상 정렬 : DAG(Directed Acyclic Graph)에만 적용 가능, 사이클이 존재하면 안된다
-   * 진입차수가 0인 노드부터 시작해서 간선을 없애나가며 순서를 정한다
-   */
-  class TopologySort{
-      int n;                          // 노드 개수
-      int[] inDegree;                 // 진입차수
-      Queue<Integer> queue;
-      List<Integer>[] edge;             // 노드를 우선순위로 가지고있는 노드 리스트
-      List<Integer> result;                   // 결정된 순서를 담을 배열
+    /**
+     * 순서가 정해져있는 작업을 차례로 수행해야 할 때, 순서를 결정하기 위해 사용하는 알고리즘
+     * 진입차수 : 노드로 들어오는 간선의 개수
+     * 위상 정렬 : DAG(Directed Acyclic Graph)에만 적용 가능, 사이클이 존재하면 안된다
+     * 진입차수가 0인 노드부터 시작해서 간선을 없애나가며 순서를 정한다
+     */
+    class TopologySort{
+        int n;                          // 노드 개수
+        int[] inDegree;                 // 진입차수
+        Queue<Integer> queue;
+        List<Integer>[] edge;             // 노드를 우선순위로 가지고있는 노드 리스트
+        List<Integer> result;                   // 결정된 순서를 담을 배열
 
-      TopologySort(int size){
-          this.n = size;
-          inDegree = new int[size+1];
-          queue = new LinkedList<>();
-          edge = new ArrayList[size+1];
-          for (int i=1; i<edge.length; i++){
-              edge[i] = new ArrayList<>();
-          }
-          result = new ArrayList<>();
+        TopologySort(int size){
+            this.n = size;
+            inDegree = new int[size+1];
+            queue = new LinkedList<>();
+            edge = new ArrayList[size+1];
+            for (int i=1; i<edge.length; i++){
+                edge[i] = new ArrayList<>();
+            }
+            result = new ArrayList<>();
 
-      }
-      public void sortOrder(){
-          for(int i=1; i<=n; i++){
-              if(inDegree[i] == 0) this.queue.offer(i);
-          }
-          while(!queue.isEmpty()){
-              int next = queue.remove();
-              result.add(next);
-              for (Integer i : edge[next]){
-                  // 새롭게 진입차수가 0이 된 정점을 큐에 삽입
-                  if(--inDegree[i] == 0){
-                      queue.offer(i);
-                  }
-              }
+        }
+        public void sortOrder(){
+            for(int i=1; i<=n; i++){
+                if(inDegree[i] == 0) this.queue.offer(i);
+            }
+            while(!queue.isEmpty()){
+                int next = queue.remove();
+                result.add(next);
+                for (Integer i : edge[next]){
+                    // 새롭게 진입차수가 0이 된 정점을 큐에 삽입
+                    if(--inDegree[i] == 0){
+                        queue.offer(i);
+                    }
+                }
 
-          }
+            }
 
-      }
+        }
 
-  }
+    }
    ```
 
 

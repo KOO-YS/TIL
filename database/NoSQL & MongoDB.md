@@ -313,7 +313,7 @@
 
 
 
-- sort( { "필드명" : 1} ) 
+- sort( { "필드명" : 1} ) : 특정 필드를 기준으로 정렬 순서를 정한다
 
   - 1 (오름차순) | -1 (내림차순) 
 
@@ -321,13 +321,13 @@
   > db.orders.find().sort( {"category":1} )
   ```
 
-- limit( 출력할 갯수 )
+- limit( 출력할 갯수 ) : 출력될 데이터의 갯수를 한정짓는다
 
   ```
   > db.orders.find().limit(3)
   ```
 
-- skip( 출력을 제외할 row 개수 )
+- skip( 출력을 제외할 row 개수 ) : 순차적으로 봤을 때 특정 갯수만 제외하고 나머지만 출력
 
   ```
   > db.orders.find().skip(2)
@@ -339,5 +339,98 @@
 
 
 
-https://velopert.com/545
+- update() : Collection 안에 document를 수정
+
+  - **특정 필드 수정 또는 존재하는 도큐먼트 변형**
+
+  - 특정 필드 수정
+
+    ```
+    > db.people.update( {조건:"조건값"}, {$set : { 수정할필드명 }: 변경값 } } )
+    
+    [ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 }) ] 
+    ```
+
+  - 도큐먼트 변경
+
+    ```
+    // 변경 전 확인
+    > db.people.find({"name":"Betty"});
+    
+    [ { "_id" : ObjectId("5f534d27026240edd0a61b8e"), "name" : "Betty", "age" : 20 } ]
+    
+    
+    // replace 
+    > db.people.update( { name : "Betty"}, {"name": "Betty 2nd", age : 1} )
+    
+    [ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 }) ]
+    
+    // 변경 후 확인
+    > db.people.find({"name":"Betty 2nd"});
+    [ { "_id" : ObjectId("5f534d27026240edd0a61b8e"), "name" : "Betty 2nd", "age" : 1 } ]
+    ```
+
+  - 필드 삭제
+
+    ```
+    // 삭제 전 변경
+    > db.people.find({name:"David"})
+    
+    [ { "_id" : ObjectId("5f534d27026240edd0a61b90"), "name" : "David", "age" : 23, "score" : 20 } ]
+    
+    // 필드 삭제
+    > db.people.update( {name:"David"}, { $unset : {score : 1} })
+    
+    [ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 }) ]
+    
+    // 삭제 후 확인
+    > db.people.find({name:"David"})
+    
+    [ { "_id" : ObjectId("5f534d27026240edd0a61b90"), "name" : "David", "age" : 23 } ]
+    ```
+
+
+
+---
+
+
+
+- Index
+  - 데이터 쿼리의 효율을 높여줌
+  - document들을 가르키는 포인터 값으로 이루어진 B-Tree(Balanced Binarysearch Tree)를 만든다
+  - index의 종류
+    - 기본 인덱스 `_id` : 기본 제공되는 인덱스. 컬렉션에서 자동으로 _id 필드값을 ObjectId로 설정
+    - 단일 필드 인덱스 : 사용자가 원하는 필드로 지정 가능
+    - 복합 필드 인덱스 : 두개 이상의 필드로 사용하는 인덱스
+    - MultiKey 인덱스 : 필드 타입이 배열인 필드에 인덱스 적용
+    - Geospatial 인덱스 : 지도의 좌표와 같은 데이터를 위한 인덱스
+    - Text 인덱스 : 텍스트 관련 데이터를 위한 인덱스
+    - 해쉬 인덱스 : B-Tree가 아닌 Hash 자료구조를 사용한 인덱스. 정렬보다 검색 효율에 중점
+
+
+
+- Index 생성
+
+  ```
+  > db.콜렉션.createIndex( { 필드 : 1 } )
+  ```
+
+- Index 속성
+
+  - Unique 속성 : 고유값을 가지도록 함
+  - Partial 속성 : document에 조건을 정하여 일부 document에만 인덱스를 적용할 때 사용
+    - 필요한 부분만 인덱스를 적용하여 저장공간을 아끼면서 속도를 높인다
+  - TLL 속성 : Date, Date 배열 타입의 필드에만 적용할 수 있는 속성. document를 만료시킬 수 있다
+
+- Index 조회
+
+  ```
+  > db.people.getIndexes()
+  ```
+
+- Index 제거 (`_id` 인덱스 제외)
+
+  ```
+  > db.people.dropIndex( { key : 1 } )
+  ```
 

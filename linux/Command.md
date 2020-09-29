@@ -111,7 +111,7 @@
 
 
 
-![io detail](https://github.com/KOO-YS/TIL/tree/master/linux/linux-io.jpg)
+![io detail](img/linux-io.jpg)
 
 ###### command output
 
@@ -141,7 +141,7 @@
 
 ### *shell script*
 
-![kernel vs shell](https://github.com/KOO-YS/TIL/tree/master/linux/kernel-n-shell.jpg)
+![kernel vs shell](img/kernel-n-shell.jpg)
 
 `shell` : 사용자. 껍데기
 
@@ -188,20 +188,6 @@ cp *.log bak							// log 확장자를 가진 모든 파일을 bak에 복붙
 >**(실행을 위해 입력)**
 >
 >###### yaans@ubuntu:~/study/command/script$ ./backup
->
->yaans@ubuntu:~/study/command/script$ ls -l
->total 8
->-rw-rw-r-- 1 yaans yaans    0 Sep 29 12:52 a.log
->-rwxrwxr-**x** 1 yaans yaans   62 Sep 29 12:55 backup
->drwxrwxr-**x** 2 yaans yaans 4096 Sep 29 12:55 bak
->-rw-rw-r-- 1 yaans yaans    0 Sep 29 12:52 b.log
->yaans@ubuntu:~/study/command/script$ cd bak
->yaans@ubuntu:~/study/command/script/bak$ ls -l
->total 0
->-rw-rw-r-- 1 yaans yaans 0 Sep 29 12:55 a.log
->-rw-rw-r-- 1 yaans yaans 0 Sep 29 12:55 b.log
->
->
 
 
 

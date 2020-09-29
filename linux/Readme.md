@@ -1,11 +1,15 @@
-# Setting For Linux 
+### Setting For Linux 
 
-## 
-Windows Subsystem for Linux
-=======
-## WSL 2
+---
 
-Windows Subsystem for Linux 2
+#### 1. VMware
+
+[VMware 설치](https://jhnyang.tistory.com/233)
+
+
+
+#### 2. Windows Subsystem for Linux (WSL2)
+###### Windows Subsystem for Linux 2
 
 [WSL2에 대한 간단한 설명](https://medium.com/@cratios48/%EC%9C%88%EB%8F%84%EC%9A%B0%EC%97%90-%EC%98%AC%EB%A6%B0-%EB%A6%AC%EB%88%85%EC%8A%A4-wsl2-bbd007851147)
 
@@ -43,7 +47,7 @@ WslRegisterDistribution failed with error: 0x8007019e
 
 ​		 -> `Windows 기능 켜기 끄기` -> `Windows Linux 하위시스템` 체크
 
-**그래도 에러**
+**그래도 에러**...
 
 
 
@@ -55,6 +59,12 @@ WslRegisterDistribution failed with error: 0x8007019e
 
 [WSL2 설치방법 참고 3](https://www.44bits.io/ko/post/wsl2-install-and-basic-usage)
 
-
-
 네트워크 드라이브로 바로 접근할 수 있는 방법 : `\\wsl$\Ubuntu\`
+
+
+
+---
+
+
+
+### curriculum For Linux 

@@ -6,7 +6,9 @@
 - [Algorithm](#Algorithm)
 - [Git](#Git)
 - [DataBase](#DataBase)
-- [Tech Interview](#TechInterview)
+- [Linux](#Linux)
+- [Network](#Network)
+- [Tech Interview](#Tech-Interview)
 
 ---
 #### Algorithm​
@@ -29,7 +31,19 @@
 
 
 
-#### TechInterview
+#### Linux 
+
+- [명령어 정리](https://github.com/KOO-YS/TIL/blob/master/linux/command.md)
+
+
+
+#### Network
+
+- [네트워크 개념 정리](https://github.com/KOO-YS/TIL/tree/master/network)
+
+
+
+#### Tech-Interview
 
 - [기술면접 정리](https://github.com/KOO-YS/TIL/blob/master/techInterview)
 

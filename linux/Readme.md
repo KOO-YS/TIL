@@ -1,4 +1,17 @@
-### Setting For Linux 
+# Linux
+
+- [Setting For Linux](#Setting) 
+- [Curriculum For Linux](#Curriculum) 
+
+
+
+
+
+
+
+
+
+### Setting 
 
 ---
 
@@ -67,4 +80,8 @@ WslRegisterDistribution failed with error: 0x8007019e
 
 
 
-### curriculum For Linux 
+### Curriculum
+
+독학 커리큘럼 🍤
+
+1. [생활코딩 - 리눅스](https://www.inflearn.com/course/%EC%83%9D%ED%99%9C%EC%BD%94%EB%94%A9-%EB%A6%AC%EB%88%85%EC%8A%A4-%EA%B0%95%EC%A2%8C/dashboard)

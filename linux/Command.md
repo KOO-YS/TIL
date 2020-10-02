@@ -379,6 +379,275 @@ daemon 은 start, stop 명령어로 켜고 끌 수 있다
 
 ---
 
+
+
+### *user*
+
+
+
+###### 현재 사용하고 있는 사용자가 누군지 확인
+
+> id
+>
+> 출력 :
+> uid=1000(yaans) gid=1000(yaans) . . .
+
+
+
+###### 사용하고 있는 사용자들이 누구있는지 확인
+
+> who
+>
+> 출력 :
+> yaans    :0           2020-10-01 21:27 (:0) . . . 
+
+
+
+###### 관리자와 일반 사용자
+
+yaans@ubuntu:~**$**  : 일반사용자
+
+yaans@ubuntu:~**#** : 관리자
+
+
+
+###### 관리자로 변환
+
+> su - root
+
+<del>관리자 패스워드 바꾸며 unlock</del>
+
+> sudo passwd -u root
+
+
+
+---
+
+
+
+### *permission*
+
+
+
+#### 파일 권한
+
+drwxr-xr-x
+
+d | rwx | r-x | r-x
+
+| d    | rwx         | r-x              | r-x              |
+| ---- | ----------- | ---------------- | ---------------- |
+| 타입 | 소유주 권한 | 그룹 사용자 권한 | 기타 사용자 권한 |
+
+`r` : read 읽기 권한
+
+`w` : write 쓰기 권한
+
+`x` : execute 실행 권한
+
+`-` : 권한 설정 없음
+
+
+
+##### 권한 변경
+
+> chmod o+w date.log
+>
+> <u>*mean : 모든 사용자(o)들의 쓰기 권한 추가*</u>
+
+`+` : 권한 추가		`-`: 권한 제거
+
+
+
+###### 실행이 특정 디렉토리에서만 제한한 실행파일의 경우고
+
+> chmod u+x executefile.sh
+
+###### 권한 설정으로 어디서든 특정 사용자가 접근할 수 있다
+
+ 
+
+##### directory의 권한
+
+> chmod o-r command-dir
+>
+> <u>*mean : directory의 다른사용자들의 읽기 권한을 제거해 접근 불가*</u>
+
+
+
+##### chmod의 사용 응용법
+
+- **사용자 클래스 구분**
+
+<img src="img/chmod-users.png" style="float:left;">
+
+- **숫자를 이용한 권한 부여**
+
+  > chmod 777 abc.txt
+
+  <img src="img/chmod-octal.png" alt="octal" style="zoom:80%; float: left;" />
+
+
+
+---
+
+
+
+### *group*
+
+생략
+
+
+
+---
+
+
+
+### *internet & network & server*
+
+
+
+1. ###### 현재 사용중인 컴퓨터 ip 주소 확인
+
+   라우터로부터 private address를 확인
+
+> ip addr
+
+
+
+2. ###### 웹 html 소스를 출력 -> 현 컴퓨터 아이피를 알려주는 페이지 방문
+
+   외부에 접속할 때 사용하는 ip. 즉 공인 ip(라우터 주소)를 확인
+
+> curl ipinfo.io/ip
+
+
+
+#### apache web server
+
+> sudo apt-get update
+>
+> sudo apt-get install apache2
+>
+> 
+>
+> // 서비스 동작 테스트
+>
+> sudo service apache2 start [end || stop || restart]
+>
+> 
+>
+> // 웹브라우저 프로그램 설치
+>
+> sudo apt-get install elinks
+>
+> elinks 			> 리눅스용 web browser 출력  || q 로 종료
+
+
+
+###### 내 아이피를 이용한 웹 브라우저 접속
+
+> elinks [내 컴퓨터 ip]
+>
+> or
+>
+> elinks 127.0.0.1
+
+
+
+###### index.html 변경
+
+> cd /var/www/html 											> 이동
+>
+> sudo mv index.html test.html						 > 기본 가지고있는 index.html을 test.html로 변경
+>
+> 
+>
+> sudo nano index.html										>  테스트 html 파일 생성
+>
+> elinks 127.0.0.1													> 변경된 index.html 페이지 확인
+
+
+
+###### 웹서버 로그 확인
+
+> ###### [ 확인용 터미널 ]
+>
+> cd /var/log/apache2
+>
+> tail -f access.log
+
+> ###### [ 접속용 터미널 ]
+>
+> elinks 127.0.0.1
+
+\* *웹브라우저에 접속하면 실시간으로 access.log에 접속 기록이 저장된다*
+
+
+
+#### SSH
+
+> sudo apt-get install openssh-server [openssh-client]
+>
+> sudo service ssh start
+>
+> sudo ps aux | grep ssh 												> 동작 확인
+
+
+
+###### 원격제어 할 컴퓨터에 접속
+
+> sudo ssh 사용자이름@ip주소
+
+
+
+#### port
+
+<del>default gateway (공인 ip) 확인</del> 
+
+> ip route
+
+
+
+---
+
+
+
+### *domain*
+
+
+
+###### localhost 같은 호스트 이름을 설정할 수 있다
+
+> nano etc/hosts					> ip와 host name 설정
+
+\* 이 파일에 없으면 그때 DNS에서 검색
+
+
+
+###### 사용하고 있는 DNS 서버의 ip 확인
+
+> cat /etc/resolv.conf
+
+
+
+###### 도메인으로 어떻게 연결되는지 확인
+
+> dig +trace www.naver.com
+
+1. 클라이언트 컴퓨터에 연결된 DNS 서버로 연결
+2. root DNS 서버로 연결 (무조건 알고 있다)
+3. com/co.kr/net 등 각각 도메인을 연결한 root DNS서버 중 필요한 root DNS 서버 연결
+4. 요청한 DNS 서버의 ip를 요구
+5. ip를 이용해 클라이언트는 브라우저에 연결
+
+
+
+
+
+
+---
+
 #### 참고 자료
 
 - ##### [생활코딩 - 리눅스](https://www.inflearn.com/course/%EC%83%9D%ED%99%9C%EC%BD%94%EB%94%A9-%EB%A6%AC%EB%88%85%EC%8A%A4-%EA%B0%95%EC%A2%8C/dashboard)

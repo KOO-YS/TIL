@@ -643,6 +643,98 @@ d | rwx | r-x | r-x
 
 
 
+---
+
+
+
+### *rsync*
+
+remote로 서버간의 동기화
+
+
+
+> //테스트를 진행하기 위한 경로 2개 생성
+>
+> mkdir from
+>
+> mkdir to
+>
+> 
+>
+> // from 경로로 이동
+>
+> cd from
+>
+> 
+>
+> // test파일 10개 생성
+>
+> touch test{1..10}
+>
+> 
+>
+> cd ..
+>
+> // from 경로 <u>안의</u> 파일들을 to 경로로 싱크
+>
+> rsync -a from/ to
+>
+> // 상세한 변경사항 확인 가능
+>
+> rsync -a**v** from/ to
+>
+> 출력
+>
+> ```
+> sending incremental file list
+> ./
+> test5
+> test6
+> 
+> sent 266 bytes  received 57 bytes  646.00 bytes/sec
+> total size is 0  speedup is 0.00
+> ```
+
+
+
+---
+
+
+
+### *ssh public key private key*
+
+
+
+###### 다른 컴퓨터에 로그인
+
+> ssh 다른사용자@다른사용자ip
+
+*<u>-> 더 안전하게 로그인 해보자</u>*
+
+
+
+###### ssh 공개키 비공개키 만들기
+
+> ssh-keygen
+>
+> // test를 위해 비밀문구 없이 생성
+
+###### 생성 확인
+
+> cd ~
+>
+> cd .ssh
+>
+> ls -al 					> id_rsa (private key), id_rsa.pub (public key) 생성 확인
+
+\* 공개키가 저장되어 있는 컴퓨터에 비밀키를 가지고 로그인이 가능하다
+
+
+
+id_rsa.pub를 로그인할 컴퓨터의 authorized_keys 에 붙여넣는다
+
+>  ssh-copy-id  다른사용자@다른사용자ip
+
 
 
 

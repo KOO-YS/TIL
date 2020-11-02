@@ -54,29 +54,26 @@
 
 - Insection Sort (삽입 정렬)
 
-  ```
+  ```java
   /**
   * 한 데이터 값의 크기가 들어가야할 곳을 탐색한 후, 나머지를 한칸씩 옮긴 뒤 끼워넣는다
   * @param arr 정렬 대상
   */
   void insertionSort(int[] arr) {
-     for(int index = 1 ; index < arr.length ; index++){
+     	for(int index = 1 ; index < arr.length ; index++){
   
-        int temp = arr[index];
-        int aux = index - 1;
+            int temp = arr[index];
+            int aux = index - 1;
   
-        while( (aux >= 0) && ( arr[aux] > temp ) ) {
+        	while( (aux >= 0) && ( arr[aux] > temp ) ) {
+           		arr[aux+1] = arr[aux];
+           		aux--;
+        	}
+      	arr[aux + 1] = temp;
+     	}
+  }
+```
   
-           arr[aux+1] = arr[aux];
-           aux--;
-        }
-      arr[aux + 1] = temp;
-     }
-}
-  ```
-  
-
-
 
 
 

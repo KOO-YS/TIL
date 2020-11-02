@@ -18,6 +18,8 @@
   - 원격저장소와의 연결 끊기 및 .git 파일
 - [Stash](#Stash) 
   - 변경 상태를 커밋 하지 않고 임시로 보관
+- [Grep](#Grep)
+  - 저장소 내에서 특정 단어를 포함한 파일 검색
 ---
 
 
@@ -123,6 +125,8 @@
 - 커밋 스테이지에서 내리기 (add 취소)
 
   ```
+  git reset
+  
   git restore --staged 파일명
   ```
 
@@ -138,7 +142,11 @@
   git log			(나가는 방법 ESC -> Q)
   ```
 
+- 커밋 취소
 
+  ```
+  git reset HEAD^
+  ```
 
 
 
@@ -243,4 +251,21 @@
 
   ```
   git stash list
+  ```
+
+
+
+## Grep
+
+특정 단어가 포함된 파일을 검색
+
+- 검색하기
+
+  ```
+  git grep "검색 단어"
+  
+  (예시)
+  $ git grep "에라토스"
+  baekjoon/Baekjoon_6588.md:     * 에라토스테네스의 체 공식 -> 소수 판별
+  baekjoon/Baekjoon_9020.md:     * 에라토스테네스의 체 공식 -> 소수 판별
   ```

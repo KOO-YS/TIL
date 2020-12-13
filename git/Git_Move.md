@@ -11,3 +11,11 @@ https://lazyren.github.io/devlog/gitlab-to-github-repo-clone.html
 
 
 https://velog.io/@29been/Github-100MB%EB%B3%B4%EB%8B%A4-%ED%81%B0-%ED%8C%8C%EC%9D%BC-%EC%98%AC%EB%A6%AC%EA%B8%B0
+
+
+
+
+
+or submodule
+
+https://brendancleary.com/2013/03/08/including-a-github-wiki-in-a-repository-as-a-submodule/

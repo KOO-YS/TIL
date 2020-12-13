@@ -6,3 +6,5 @@
 3. `linux` system programming
 4. github `blog` for web portfolio 
 5. [Elastic Search](https://esbook.kimjmin.net/) 
+
+6. MSA

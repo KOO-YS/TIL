@@ -69,31 +69,117 @@ java 진영 로깅에 대한 추상체(facade) -> `인터페이스`
 
 
 
-#### log4j2
+##### *log4j2 사용 결정*  `->`
 
 
 
 #### Log 구성요소
 
-1. Logger 
-   - 실제 로그 기능 수행
+1. **Logger** 
+   - 실제 로그 기능 수행 (로깅 메시지를 Appender에게 전달)
    - 로깅이 일어나는 부분을 그룹화해 필요한 그룹의 로그만 출력
-   - 로그 그룹의 우선순위를 부여해 출력 등
-2. Appender
+   - 로그 그룹의 우선순위를 부여해 출력 등 
+2. **Appender**
    - 로그의 출력 위치 지정
    - 설정 가능 위치 : console, file, outputStream, java.io.writer, SMTP, network
-3. Layout
-   - 로그의 출력 포멧 지정
+3. **Layout**
+   - 로그의 출력 포맷 지정
+   - 참고 : https://logging.apache.org/log4j/2.x/manual/layouts.html
+
+
+
+#### Appender 종류 
+
+
+
+##### 1. Console Appender
+
+- **Console 태그** 사용
+
+- `target` : 출력 방식 [SYSTEM_OUT || SYSTEM_ERR]
+
+  ```xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <Configuration>
+      <Properties>
+          <Property name="logging_name">museum-log</Property>
+          <Property name="log_pattern">%d{yyyy/MM/dd HH:mm:ss} %highlight{%-5level}{FATAL=white, ERROR=red, WARN=blue, INFO=green, DEBUG=green, TRACE=blue}[%t] %C %m%n</Property>
+      </Properties>
+      <Appenders>
+          <Console name="console_appender" target="SYSTEM_OUT">
+              <PatternLayout pattern="${log_pattern}" disableAnsi="false"/>
+          </Console>
+      </Appenders>
+      <Loggers>
+          <Root level="info">
+              <AppenderRef ref="console_appender"/>
+          </Root>
+      </Loggers>
+  </Configuration>
+  ```
+
+
+
+##### 2. Rolling File Appender
+
+- **RollingFile 태그** 사용
+
+- 파일에 로그를 기록하되, <u>로그가 속성으로 지정한 **크기**와 **날짜** 이상이 되면 분류해서 저장한다</u> -> `rolling`
+
+- `Policy`에서 **파일 분리를 위한 기준**을 정할 수 있다  
+
+  - `TimeBasedTriggeringPolicy` : 해당 시간마다 기록을 분리
+  - `SizeBasedTriggeringPolicy` : 해당 사이즈 초과시 기록을 분리
+  - `DefaultRolloverStrategy` 
+    - fileIndex : min일 때, 숫자가 작을수록 최신파일 | max일 때, 숫자가 클수록 최신파일 
+    - min : 인덱스의 최소값 (default : 1)
+    - max : 인덱스 최대값 (최대값까지 도달하면, 기존에 있는 파일을 덮어씀)
+
+  ```xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <Configuration>
+      <Properties>
+          <Property name="logging_name">museum-log</Property>
+          <Property name="log_pattern">%d{yyyy/MM/dd HH:mm:ss} %highlight{%-5level}{FATAL=white, ERROR=red, WARN=blue, INFO=green, DEBUG=green, TRACE=blue}[%t] %C %m%n</Property>
+      </Properties>
+      <Appenders>
+          <RollingFile name="file_appender" fileName="logs/${logging_name}.log" filePattern="logs/${logging_name}_%d{yyyy-MM-dd}-%i.log">
+              <PatternLayout pattern="${log_pattern}"/>
+              <Policies>
+                  <!--용량 초과시 다음 넘버 사용해 로그 파일 생성-->
+                  <SizeBasedTriggeringPolicy size="100KB"/>
+                  <!--1일마다 로그 파일 생성-->
+                  <TimeBasedTriggeringPolicy interval="1"/>
+              </Policies>
+              <!--최대 10개까지 파일 생성-->
+              <DefaultRolloverStrategy max="100" fileIndex="min"/>
+          </RollingFile>
+      </Appenders>
+      <Loggers>
+          <Root level="info">
+              <AppenderRef ref="file_appender"/>
+          </Root>
+      </Loggers>
+  </Configuration>
+  ```
+
+- 생성된 모습 예시
+
+   <img src="img\rolling.jpg" style="zoom: 80%; float:left;" />
 
 
 
 
 
+< -- Loggers & SMTP 메일 어팬더 추가 예정 -- >
 
 
 
 
-#### *<u>세팅 시, 주의할 점</u>*
+
+---
+
+#### *<u>Spring Boot 세팅 시, 주의할 점</u>*
 
 SLF4J는 하나의 구현체만 가질 수 있으며 스프링 부트는 기본적으로 logback을 내장하고 있다.
 
@@ -103,21 +189,7 @@ SLF4J는 하나의 구현체만 가질 수 있으며 스프링 부트는 기본�
 SLF4J: Class path contains multiple SLF4J bindings.
 ```
 
-error 수정 : https://huisam.tistory.com/entry/log4j2
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+error 수정 참고 : https://huisam.tistory.com/entry/log4j2
 
 
 
@@ -133,8 +205,8 @@ error 수정 : https://huisam.tistory.com/entry/log4j2
 >
 > [로깅 라이브러리 비교 2](https://madplay.github.io/post/log4j-logback-log4j2)
 >
-> [로깅 구성 컴포넌트 1](https://goddaehee.tistory.com/45)
+> [로깅 구성 컴포넌트 1](https://velog.io/@bread_dd/Log4j-2-%EC%A0%9C%EB%8C%80%EB%A1%9C-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-%EA%B0%9C%EB%85%90)
 >
-> [로깅 구성 컴포넌트 2](https://to-dy.tistory.com/20)
+> [로깅 구성 컴포넌트 2](https://pakss328.medium.com/log4j2-xml-%EC%84%A4%EC%A0%95-a3aa0d1bea2f)
 >
 > [실습 안 한 logback 설정 참고](https://goddaehee.tistory.com/206)

@@ -72,10 +72,11 @@
       	arr[aux + 1] = temp;
      	}
   }
-```
-  
+  ```
 
+<br>
 
+<br>
 
 
 
@@ -92,16 +93,8 @@
 - #### Quick Sort (퀵 정렬)
 
   - 분할 정복으로 인해 빠른 정렬에 속한다
-
-  - 평균 시간 복잡도는 O(NlogN)이지만 최악의 경우 O(N^2)까지 간다
-
-    ```
-    https://www.youtube.com/watch?v=gBcUO_6JXIA&list=PLRx0vPvlEmdDHxCvAQS1_6XV4deOwfVrz&index=6
-    ```
-
-    
-
-
+- 평균 시간 복잡도는 O(NlogN)이지만 최악의 경우 O(N^2)까지 간다
+  - 참고 : https://www.youtube.com/watch?v=gBcUO_6JXIA&list=PLRx0vPvlEmdDHxCvAQS1_6XV4deOwfVrz&index=6
 
 - #### Heap Sort (힙 정렬)
 

@@ -85,3 +85,10 @@ WslRegisterDistribution failed with error: 0x8007019e
 독학 커리큘럼 🍤
 
 1. [생활코딩 - 리눅스](https://www.inflearn.com/course/%EC%83%9D%ED%99%9C%EC%BD%94%EB%94%A9-%EB%A6%AC%EB%88%85%EC%8A%A4-%EA%B0%95%EC%A2%8C/dashboard)
+2. 리눅스마스터 2급 📋
+  > 참고 사이트 
+  > - [github 정리](https://github.com/Lee-KyungSeok/Linux-Study/tree/master/BasicBashShell)
+  > - [요약 및 족보 ](https://mozi.tistory.com/244)
+3. 이게 우분투 리눅스다 📒
+4. [리눅스 시스템 프로그래밍](https://inf.run/GowV)
+

@@ -1,0 +1,3 @@
+[submodule "linux/linux master 2"]
+	path = linux/linux master 2
+	url = https://github.com/KOO-YS/linux-learning.git

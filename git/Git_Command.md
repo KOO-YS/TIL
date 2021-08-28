@@ -215,7 +215,17 @@
   [Esc] -> :wq (write and quit)
   ```
 
-- 수정하기
+- 이미 원격 저장소에 반영된 파일들을 뒤늦게 .gitigore에 반영하더라도 해당 파일이 무시되지 않는다
+
+  ```
+  git rm -r --cached .
+  git add .
+  git commit -m "reset .gitignore"
+  git push
+  -- 반영 확인
+  ```
+
+  
 
 
 
@@ -273,3 +283,6 @@
   baekjoon/Baekjoon_6588.md:     * 에라토스테네스의 체 공식 -> 소수 판별
   baekjoon/Baekjoon_9020.md:     * 에라토스테네스의 체 공식 -> 소수 판별
   ```
+
+
+

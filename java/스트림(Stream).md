@@ -421,11 +421,113 @@ studentStream.sorted(Comparator.comparing(Student::getBan)
 Stream<R> map(Function<? super T, ? extends R> mapper)
 ```
 
-p.827
-
- 
+<br>
 
 
+
+###### example
+
+```java
+Stream<File> fileStream = Stream.of(new File("Ex1.java"), new File("Ex1"), new File("Ex1.bak"), new File("Ex2.java"), new File("Ex1.txt"));
+
+// map()으로 Stream<File>을 Stream<String>으로 변환
+Stream<String> fileNameStream = fileStream.map(File::getName);
+fileNameStream.forEach(System.out::println);        // 스트림의 모든 파일 이름을 출력
+```
+
+- 중간 연산이므로, 연산 결과는 String을 요소로 하는 스트림
+- 하나의 스트림에 여러 번 적용 가능 
+- `map()`으로 `Stream<File>`을 `Stream<String>`으로 변환했다고 볼 수 있다
+
+<br>
+
+
+
+#### 조회 - peek()
+
+연산과 연산 사이에 올바르게 처리되었는지 확인하고 싶을 때 사용
+
+`forEach()`와 달리 스트림의 요소를 소모하지 않으므로 연산 사이에 여러 번 끼워 넣어도 문제가 되지 않는다
+
+```java
+fileStream.map(File::getName)                   // Stream<File> -> Stream<String>
+    .filter(s -> s.indexOf('.') != -1)      // 확장자 없는 것 제외
+    .peek(s -> System.out.printf("filename = %s%n", s)) // 파일명 출력
+    .map(s -> s.substring(s.indexOf('.')+1))        // 확장자만 추출
+    .peek(s -> System.out.printf("extension = %s%n", s)) // 확장자 출력
+    .forEach(System.out::println);
+```
+
+<br>
+
+
+
+#### mapToInt(), mapToLong(), mapToDouble()
+
+`map()`은 연산의 결과로 Stream\<T> 타입의 스트림을 반환
+
+기본형 요소인 경우 기본형 스트림으로 변환하는 것이 더 유용할 수 있다
+
+```java
+Stream<Integer> studentScoresStream = studentStream.map(Student::getTotalScore);	// score만 뽑아 스트림 저장
+int allTotalScore = studentScoresStream.sum();
+```
+
+- `count()`만 지원하는 Stream\<T>와 달리 IntStream과 같은 기본형 스트림은 숫자를 다루는데 편리한 메소드들을 제공
+
+  ```java
+  int sum()
+  OptionalDouble average()
+  OptionalInt max()
+  OptionalInt min()
+  ```
+
+  - **스트림의 요소가 하나도 없을 때**
+    - `sum()`의 경우 0을 반환하면 된다
+    - BUT, 다른 메소드들은 단순히 0을 반환할 수 없다 -> `Optional*`을 반환한다 
+  - 이 메소드들은 최종 연산이기 때문에 호출 후 스트림이 닫힌다
+
+기본형 스트림과 반대로 IntStream을 Stream\\<T>로 변환할 때는`mapToObj()`를, Stream\<Integer>로 변환할 때는 `boxed()`를 사용한다
+
+```java
+IntStream intStream = new Random().ints(1, 46);
+        Stream<String> lottoStream = intStream.distinct()
+                                        .limit(6)
+                                        .sorted()
+                                        .mapToObj(i -> i+", ");     // 정수를 문자열로 변환
+										// IntStream -> Stream<String>
+        lottoStream.forEach(System.out::print);
+```
+
+<br>
+
+
+
+#### flatMap() - Stream\<T[]>를 Stream\<T>로 변환
+
+스트림의 요소가 배열이나 `map()`의 연산 결과가 배열인 경우, 즉 스트림의 타입이 Stream\<T[]>인 경우, Stream\<T>로 다루는 것이 더 편리할 때가 있다 -> `flatMap()` 사용
+
+```java
+// 문자열 배열(Stringp[) 스트림
+Stream<String[]> strArrStream = Stream.of(
+    new String[]{"abc", "def", "ghi"},
+    new String[]{"ABC", "GHI", "JKLMN"}
+);
+```
+
+각 요소의 문자열들을 합쳐서 문자열이 요소인 스트림, Stream<String>으로 만들려면?
+
+:x:
+
+```java
+Stream<Stream<String>> strStrStream = strArrStream.map(Arrays::stream);     // .. 문자열 스트림의 스트림...?
+```
+
+:o:
+
+```java
+Stream<String> strStream = strArrStream.flatMap(Arrays::stream);  		// 각 배열을 하나의 스트림안에 정리
+```
 
 
 

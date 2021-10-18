@@ -83,11 +83,32 @@ Spring 프레임워크를 Model-View-Controller로 다루는 모듈
 
 
 
+![](img\mvc-flow.jpg)
+
+### Spring MVC 흐름 파악하기
+
+
+
+**start ! ** 요청 request 이 들어온다
+
+:arrow_forward: `Dispatcher Servlet`이 요청을 받는다
+
+:arrow_forward: `Handler Mapping`의 도움으로,  request와 관련있는 컨트롤러 이름을 확인한다
+
+​	 확인이 됐다면? request를 컨트롤러로 이동시킨다
+
+:arrow_forward: `Handler Adapter`가 `Contoller`의 적절한 메소드를 호출해서 요청을 처리한다
+
+:arrow_forward: `Contoller`에서 request를 처리하고 반환받은 `Model` 데이터를 `View`에게 전달 
+
 
 
 <br>
 
+#### 주의점
 
+- 클라이언트의 요청을 실제로 처리하는 것은 `Controller`
+- 사용할 `Contoller`를 찾고, **메소드를 호출**해 처리 결과를 `ModelAndView`로 변환해주는 객체가 바로 `HandlerAdapter` :star2:
 
 <br>
 
@@ -128,3 +149,4 @@ Spring 프레임워크를 Model-View-Controller로 다루는 모듈
 👉 의존성 주입
 
 - 제어의 역전이나 의존성 주입을 사용해서, 개발자가 직접 의존성을 위한 환경을 만들 필요가 없다
+

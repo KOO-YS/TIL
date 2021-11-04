@@ -24,7 +24,7 @@
 
 
 
-#### 기존문제점들을 해결 -> 스트림
+#### 기존문제점들을 해결 & 통합 -> 스트림
 
 - 데이터 소스를 추상화
   - 데이터 소스가 **무엇이든 같은 방식으로 다룰 수 있다**
@@ -529,15 +529,80 @@ Stream<Stream<String>> strStrStream = strArrStream.map(Arrays::stream);     // .
 Stream<String> strStream = strArrStream.flatMap(Arrays::stream);  		// 각 배열을 하나의 스트림안에 정리
 ```
 
+<br>
 
 
 
+---
+
+<br>
 
 
 
+### Optional\<T>와 OptionalInt
+
+> #### Optional\<T>
+>
+> - 제네릭 클래스로 'T타입의 객체'를 감싸는 래퍼 클래스
+> - Optional 타입의 객체에는 모든 타입의 참조 변수를 담을 수 있다
+>
+> ```java
+> public final class Optional<T> {
+>     private final T value;
+> }
+> ```
+
+최종연산의 결과를 그냥 반환하는 것이 아닌 Optional 객체에 담아서 반환
+
+- Optional 객체에 담아서 반환을 하면, 반환된 결과가 null인지 매번 if문으로 체크하는 대신 Optional에 정의된 메소드를 통해서 간단히 처리 가능
 
 
 
+#### Optional 객체 생성
+
+- `of()` 
+
+또는  
+
+- `ofNullable()`-> 참조 변수의 값이 null일 가능성이 있을 경우
+
+을 사용한다
+
+```java
+String str = "asd";
+Optional<String> optVal = Optional.of(str);
+Optional<String> optVal = Optional.of("asd");
+Optional<String> optVal = Optional.of(new String("asd"));
+```
+
+#### Optional 객체 초기화
+
+참조변수를 기본값으로 초기화할 때는 `empty()`를 사용
+
+``` java
+Optional<String> optVal = null;		// null로 초기화하는 것이 가능하지만,
+Optional<String> optVal = Optional.<String>empty();	// empty가 바람직
+```
+
+#### Optional 객체의 값 가져오기
+
+- `get()`
+
+또는
+
+- `orElse()` -> 참조변수의 값이 null일 경우 대비
+
+사용
+
+```java
+Optional<String> optVal = Optional.of("asd");
+String str1 = optVal.get();
+String str2 = optVal.orElse("");	// null인 경우, ""를 반환
+```
+
+- `orElse()`의 변형
+  - `orElseGet()` : null을 대체할 값을 반환하는 람다식 지정 가능
+  - `orElseThrow()` : null일 때 지정된 예외를 발생
 
 
 

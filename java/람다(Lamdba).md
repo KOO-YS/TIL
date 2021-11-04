@@ -20,7 +20,7 @@
 
 - ##### 익명 함수 anonymous function
 
-  - 메소드를 람다식으로 표현하면 메소드의 이름과 반환값이 없어지므로 쓰는 표현
+  - ###### 메소드를 람다식으로 표현하면 메소드의 이름과 반환값이 없어지므로 쓰는 표현
 
     ```java
     int[] arr = new int[5];
@@ -111,7 +111,8 @@ interface MyFunction {
 
 // 익명함수로 실행
 public void main(String[] args) {
-    MyFunction f = new Function() {
+    MyFunction f = new MyFunction() {
+        @Override
         public int max(int a, int b) {	// 익명 객체 생성
             return a>b a:b;
         }

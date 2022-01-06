@@ -122,7 +122,95 @@
     |   CLASS   |  클래스 파일에 존재. 실행시에 사용 불가. 기본값   |
     |  RUNTIME  |      클래스 파일에 존재. 실행시에 사용 가능       |
 
+  - 추가 설명 필요 \*
+  
+- ##### @Documented
+
+  - 어노테이션에 대한 정보가 javadoc으로 작성한 문서에 포함되도록 한다
+  - 자바가 제공하는 기본 어노테이션 중 `@Override`와 `@SuppressWarnings`를 제외하고는 모두 `@Documented`가 붙어 있다
+
+- ##### @Inherited
+
+  - 어노테이션이 자손 클래스에 상속되도록 한다
+  - `@Inherited`를 조상 클래스에 붙이면 자손 클래스도 이 어노테이션을 인식한다
+
+- ##### @Repeatable
+
+  - 일반적으로는 하나의 대상에 한 종유의 어노테이션을 붙이지만, 이 메타 어노테이션이 붙여 만들어진 어노테이션은 여러 번 붙일 수 있다
+
+    ```java
+    @Repeatable(ToDos.class)	// ToDos.class : 반복될 어노테이션을 저장할 통합 어노테이션
+    @Interface ToDo {
+        String value();
+    }
     
+    @ToDo("one")
+    @ToDo("two")
+    class MyClass {
+        ...
+    }
+    ```
+
+    중복 어노테이션을 하나로 묶어 다룰 수 있는 어노테이션
+
+    ```java
+    @Interface ToDos {
+        ToDo[] value();	// ToDo 어노테이션 배열 타입의 요소를 선언 -> naming : value!
+    }
+    
+    @Repeatable(ToDos.class)	// 과로 안에 꼭 어노테이션을 지정해주어야 한다
+    @Interface ToDo {
+        String value();
+    }
+    ```
+
+- ##### @Native
+
+  - native method에 의해 참조되는 상수 필드(constant field)에 붙이는 어노테이션
+  - native method : JVM이 설치된 OS의 메소드
+    - 보통 C언어로 작성되어 있으며 **자바**에서는 **메소드 선언부**만 정의하고 구현하지 않는다
+    - 호출 방식은 자바의 일반 메소드와 다르지 않지만 실제로 호출되는 것은 OS 메소드
+    - 자바에 정의된 네이티브 메소드 <-> OS 메소드를 연결시켜주는 작업이 필요 -> JNI(Java Native Interface)
+
+<br>
 
 
+
+---
+
+
+
+## Java Annotation 타입 정의
+
+<br>
+
+
+
+새로운 어노테이션 정의
+
+```java
+@interface 어노테이션이름 {
+    타입요소이름();		// 어노테이션 요소를 필드로 선언
+}
+```
+
+#### 어노테이션 요소 (element)
+
+- 어노테이션 내에 선언된 메소드 
+
+
+
+
+
+
+
+
+
+https://advenoh.tistory.com/21
+
+https://velog.io/@potato_song/Java-%EC%96%B4%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98-%EC%BB%A4%EC%8A%A4%ED%85%80-%EC%96%B4%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0
+
+https://donghyeon.dev/spring/2020/08/18/Spring-Annotation%EC%9D%98-%EC%9B%90%EB%A6%AC%EC%99%80-Custom-Annotation-%EB%A7%8C%EB%93%A4%EC%96%B4%EB%B3%B4%EA%B8%B0/
+
+https://www.nextree.co.kr/p5864/
 

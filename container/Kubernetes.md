@@ -119,8 +119,7 @@
 - `kubectl` 명령어로도 파드 생성이 되지만, 버전 관리 관점에서 yaml 파일 정의를 추천
 - 매니페스트 파일 -> 쿠버네티스의 여러 가지 리소스를 정의하는 파일
 
-
-
+![](C:\Users\kbeey\Documents\workspace-git\today-i-learned\TIL\container\pod-yaml.jpg)
 
 
 

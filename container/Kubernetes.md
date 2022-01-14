@@ -73,6 +73,8 @@
 
 <br>
 
+
+
 #### 쿠버네티스 클러스터와 노드
 쿠버네티스 클러스터 : 쿠버네티스의 여러 리소스를 관리하기 위한 집합체
 - 쿠버네티스 리소스 중 가장 큰 개념 -> 노드
@@ -84,19 +86,25 @@
 
 > ⌨ 현재 클러스터에 소속된 노드 목록 확인
 > ```shell
-> kubectl get nodes  
+> $ kubectl get nodes  
 > ```
 
 <br>
+
+
 
 > ##### 마스터 서버를 구성하는 관리 컴포넌트 종류
 > - kube-apiserver : 쿠버네티스 API를 노출하는 컴포넌트 kubectl로부터 리소스를 조작 명령 받음
 > - etcd : 고가용성을 갖춘 분산 key-value 스토어, 쿠버네티스 클러스터의 백킹 스토어로 사용
 > - kube-scheduler : 노드 모니터링, 컨테이너를 배치할 적절한 노드 선택
 > - kube-controller-manager : 리소스를 제어하는 컨트롤러를 실행
+
 <br>
 
+
+
 #### 네임스페이스
+
 쿠버네티스 클러스터 안에 만드는 가상 클러스터
 - 처음에 기본으로 존재하는 네임스페이스 4개 : `default`, `docker`, `kube-public`, `kube-system`
 - 네임스페이스별로 권한 제어가 가능
@@ -104,10 +112,12 @@
 
 > ⌨ 현재 클러스터 안에 존재하는 네임스페이스 목록 확인
 > ```shell
-> kubectl get namespace
+> $ kubectl get namespace
 > ```
 
 <br>
+
+
 
 #### 파드
 컨테이너가 모인 집합체의 단위 (최소 1개 이상의 컨테이너)
@@ -115,13 +125,122 @@
 - 단, 한 파드 안의 컨테이너들은 모두 같은 노드에 배치해야 한다 
 <br>
 
-**파드 생성 및 배포**
+:peach: **파드 생성 및 배포**
+
+**파드 생성**
+
 - `kubectl` 명령어로도 파드 생성이 되지만, 버전 관리 관점에서 yaml 파일 정의를 추천
 - 매니페스트 파일 -> 쿠버네티스의 여러 가지 리소스를 정의하는 파일
 
 ![](C:\Users\kbeey\Documents\workspace-git\today-i-learned\TIL\container\pod-yaml.jpg)
 
+<br>
 
 
 
+**파드 배포**
+
+> ⌨ 매니페스트 파일을 로컬 쿠버네티스 클러스터에 배포
+>
+> ```shell
+> $ kubectl apply -f pod.yaml
+> pod "pod" created
+> ```
+>
+> - `-f` : 매니페스트 파일에 대한 경로를 지정
+
+<br>
+
+
+
+:peach: **파드 조작**
+
+
+
+> ⌨ 목록을 조회해서 파드 상태 확인
+>
+> ```shell
+> $ kubectl get pod
+> NAME	READY	STATUS	RESTARTS	AGE
+> sample-echo 2/2 Running	011m
+> ```
+>
+> - READY :`2/2` -> `실행 상태의 컨테이너 수/파드에 정의된 컨테이너 수`
+> - STATUS : Running -> 파드 안의 모든 컨테이너가 실행 중
+
+<br>
+
+
+
+> ⌨ kubectl을 사용해 컨테이너 안에 접근
+>
+> ```shell
+> $ kubectl exec -it sample-echo sh -c nginx
+> #
+> ```
+>
+> - `-c` : 컨테이너 명 지정
+
+<br>
+
+
+
+> ⌨ 파드 안에 있는 컨테이너의 표준 출력을 화면에 출력
+>
+> ```shell
+> $ kubectl logs -f sample-echo -c echo
+> 2022/01/15 12:14:02 start server
+> ```
+
+<br>
+
+
+
+> ⌨  파드( 또는 리소스 역시 ) 삭제 
+>
+> ```shell
+> $ kubectl delete pod sample-echo
+> ```
+
+<br>
+
+
+
+> ⌨  매니페스트 파일로 파드 삭제 (매니페스트에 작성된 리소스 전체가 삭제) 
+>
+> ```shell
+> $ kubectl delete -f pod.yaml
+> ```
+
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----
+
+
+
+> ⌨ 
+>
+> ```shell
+> $ 
+> ```
+
+<br>
 

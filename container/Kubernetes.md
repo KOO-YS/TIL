@@ -216,17 +216,80 @@
 
 
 
+<br>
 
 
 
+#### 레플리카세트
+
+kind를 파드로 정의한 매니페스트 파일로는 파드를 하나밖에 생성할 수 없다
+
+어느 정도 규모가 있는 애플리케이션을 구축하려면 같은 파드를 여러 개 실행해 가용성을 확보해야 하는 경우가 생긴다
+
+**레플리카세트** : 똑같은 정의를 갖는 파드를 여러 개 생성하고 관리하기 위한 리소스
+
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+	name: echo
+	labels:
+		app: echo
+spec:
+	replicas: 3		# 레플리카세트에서 만들 파드의 복제본 수
+	selector:
+		matchLabels:
+			app: echo
+        template: # template 하단에 pod 리소스 정의
+        	metadata:
+        		labels:
+        			app: echo
+            spec:
+            	containers:
+            	- name: nginx
+            	  image: image-path/nginx:latest
+            	  env:
+            	  - name: BACKEND_HOST
+            	    value: localhost:8080
+            	  ports:
+            	  - containerPort: 80
+            	- name: echo
+            	  image: image-path:echo:latest
+            	  ports:
+            	  - containerPort: 8080
+```
+
+매니페스트 정의에 따라 파드를 replicas에서 지정한 수만큼 만들어 파드 정의 및 파드 복제를 모두 수행
+
+\* 같은 파드가 여럿 복제된 것이므로 파드명에 [`파드명`+`무작위 생성 접미사`]로 작명된다
+
+<br>
 
 
 
+> ⌨ 생성한 레플리카세트를 매니페스트 파일을 이용해 삭제  
+>
+> ```shell
+> $ kubectl delete -f sample-replicaset.yaml  # 관련 파드가 모두 삭제
+> ```
+
+<br>
 
 
 
+<br>
 
 
+
+#### 디플로이먼트
+
+레플리카세트보다 상위에 해당하는 리소스. 
+
+**디플로이먼트(deployment)** : 애플리케이션 배포(deploy)의 기본 단위가 되는 리소스
+
+> vs 리플리카세트 
+>
+> - 똑같은 파드의 레플리케이션 개수를 관리 및 제어하는 리소스인데 비해. 디플로이먼트는 레플리카세트를 관리하고 다루기 위한 리소스
 
 
 

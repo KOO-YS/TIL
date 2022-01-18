@@ -291,6 +291,40 @@ spec:
 >
 > - 똑같은 파드의 레플리케이션 개수를 관리 및 제어하는 리소스인데 비해. 디플로이먼트는 레플리카세트를 관리하고 다루기 위한 리소스
 
+- 디플로이먼트의 정의와 레플리카세트의 정의가 크게 다르지는 않다 -> **디플로이먼트가 레플리카세트의 리비전 관리를 할 수 있다는 차이**
+
+<br>
+
+
+
+> ⌨ 어떤 kubectl 명령을 실행했는지 기록을 남기는 옵션 `--record`를 붙여 kubectl로 클러스터에 반영
+>
+> ```shell
+> $ kubrctl apply -f sample-deployment.yaml --record
+> ```
+
+<br>
+
+
+
+> ⌨ 상태 확인
+>
+> ```shell
+> $ kubrctl get pod, replicaset, deployment --selector app=echo
+> ```
+
+<br>
+
+
+
+> ⌨ 리비전 확인
+>
+> ```shell
+> $ kubrctl rollout history deployment echo
+> ```
+>
+> 
+
 
 
 

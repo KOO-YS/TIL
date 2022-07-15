@@ -8,3 +8,15 @@
     - Pages
         - Java Heap 메모리 외부에 보관되며 RAM에 구성된다
         - FullRageId 라 불리는 구분자를 가지고 있다
+
+<br>
+
+### Memory Pages
+
+- page의 상태값 종류
+    - UnLoaded : 메모리에 로드된 페이지 버퍼가 없다
+    - Clear : 디스크의 데이터와 동기화되어 있으며 로드된 페이지 버퍼
+    - Durty : 디스크의 데이터와 다른 데이터를 보관하는 페이지 버퍼
+    - Dirty in checkpoint :  첫 수정 사항이 디스크에 유지되기 전에 또 다른 수정 사항을 시작 → 체크 포인트 시작. 두 개의 메모리 버퍼를 유지
+
+- Data Region : 메모리 segment를 로컬에 할당

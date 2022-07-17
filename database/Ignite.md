@@ -30,5 +30,55 @@
 - 메모리 단편화를 피하기 위해, 싱글 페이지는 여러개의 키-밸류 엔트리를 가지고 있다
     
     * **메모리 단편화 (memory fragmentation)**  → RAM 메모리의 공간이 작게 나뉘어 사용 가능한 메모리가 충분히 존재함에도 불구하고 할당이 불가능한 상태)
-    
-    -
+
+- 데이터 생성 : 모든 새 엔트리는 가장 최적화된 페이지에 더해지고 키-밸류 쌍 크기가 페이지의 최대 가용성에 비해 초과한다면, ignite는 한 페이지 이상에 데이터를 적재한다
+- 데이터 업데이트 : 생성과 동일한 로직이 적용
+- SQL 및 캐시 인덱스틑 B+ 트리 구조에 저장되며, 캐시는 키 값를 기준으로 정렬
+
+<br>
+
+### 수명주기
+
+각 ignite 노드는 단일 JVM 인스턴스에서 실행되지만, 단일 JVM 프로세스에서 여러 Ignite 노드를 실행하도록 구성 가능
+
+**수명 주기 이벤트 유형**
+
+- BEFORE_NODE_START : Ignite 노드 시작 전 실행
+- AFTER_NODE_START : Ignite 노드가 시작된 직후 실행
+- BEFORE_NODE_STOP : Ignite 노드가 중지를 시작하기 전 실행
+- AFTER_NODE_STOP : Ignite 노드가 중지된 후 실행
+
+**Ignite 노드 시작 방식**
+
+기본 실행
+
+```java
+// 기본 시작
+Ignite ignite = Ignition.start();
+```
+
+구성 파일 적용
+
+```java
+// 설정 값 적용
+Ignite ignite = Ignition.start("config/cache-config.xml");
+```
+
+초기화 프로세스 제어 → LifecycleBean
+
+```java
+public interface LifecycleBean {
+		// 수명 주기 이벤트 유형을 사용해 노드 시작/중지 전후 작업 수행 가능
+		public void onLifecycleEvent(LifecycleEventType lifecycleEventType) throws IgniteException;
+
+// ...
+}
+```
+
+초기화 프로세스 적용
+
+```java
+IgniteConfiguration configuration = new IgniteConfiguration();
+configuration.setLifecycleBeans(new 초기화_프로세스_구현체());
+Ignite ignite = Ignition.start(configuration);
+```

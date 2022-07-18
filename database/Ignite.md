@@ -82,3 +82,38 @@ IgniteConfiguration configuration = new IgniteConfiguration();
 configuration.setLifecycleBeans(new 초기화_프로세스_구현체());
 Ignite ignite = Ignition.start(configuration);
 ```
+
+<br>
+
+### 메모리 내 데이터 그리드
+
+Ignite 데이터 그리드는 분산 키-밸류 저장소 → 분산에 친숙한 HashMap과 비슷
+
+- 더 많은 클러스터 노드를 더할수록, 더 많은 데이터가 메모리에 쌓인다
+- 서드파티 소프트웨어에 상당한 성능 향상을 제공 → (예) NoSQL, RDMS 같이 캐싱을 위한 추가적인 레이어 소프트웨어
+
+<br>
+
+
+**Caching Support**
+
+- **JCache JSR 107** 사양 기반의 데이터 접근 API
+- 템플릿 설정을 이용한 캐시 생성
+    
+    ```java
+    IgniteCache<Integer, String> cache = ignite.getOrCreateCache(
+      "CACHE_EXAMPLE");
+    
+    cache.put(1, "first data");
+    String entry = cache.get(1);
+    ```
+    
+    - 캐시가 저장된 메모리 리전을 ignite가 찾는다
+    - B+ 트리 인덱스 페이지가 키의 해시코드를 기반으로 위치해 있다
+        - 만약 인덱스가 이미 존재한다면, 동일한 키를 가진 데이터 페이지를 교체
+        - 인덱스가 null이면, 새로운 데이터 앤트리를 주어진 키를 이용해서 생성
+
+<br>
+
+
+**Streaming Support**

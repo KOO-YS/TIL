@@ -46,3 +46,16 @@ Mandrel
         </profile>
     </profiles>
     ```
+
+## Container 생성
+**container-image extension 사용**
+Quarkus 애플리케이션을 컨테이너 이미지로 만들기 위해 extension을 활용할 수 있다
+
+```shell
+./mvnw package -Pnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true
+```
+
+`quarkus.native.container-build=true` : GraalVM을 설치하지 않고 Linux 실행파일을 생성할 수 있다
+    - 만약, 원격 Docker daemon을 실행 중이라면 `quarkus.native.remote-container-build=true`를 사용
+- `quarkus.container-image.build=true`를 사용하면, 애플리케이션의 artifact 정보를 사용하여 컨테이너 이미지를 생성한다
+

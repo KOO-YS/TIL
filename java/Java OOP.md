@@ -49,10 +49,29 @@
 
 ---
 
+### OOP의 4가지 특징
+**캡슐화**
+- 실제로 구현 부분을 외부에 드러나지 않도록 함
+- 변수와 메소드를 하나로 묶음
+- 데이터를 외부에서 직접 접근하지 않고 함수를 통해서만 접근
+    - 필드를 private, 필드에 접근하는 함수를 public으로 생성
+- public, private, protected
 
+**상속**
+- 자식 클래스가 부모 클래스의 특성과 기능을 물려받는 것
+- 기능의 일부분을 변경하는 경우, 자식 클래스에 상속받아서 수정
+- 상속을 통해 캡슐화를 유지하고, 클래스 재사용성을 높여준다
+
+**추상화**
+- 인터페이스로 클래스들의 공통 분모를 찾아 표현
+
+**다형성**
+- 어떤 변수, 메소드가 상황에 따라서 다른 결과를 낸다
 
 
 ---
 
 > Reference 
 > - https://velog.io/@ygh7687/OOP%EC%9D%98-5%EC%9B%90%EC%B9%99%EA%B3%BC-4%EA%B0%80%EC%A7%80-%ED%8A%B9%EC%84%B1
+> https://velog.io/@haero_kim/%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0
+> https://velog.io/@cyranocoding/%EA%B0%9D%EC%B2%B4-%EC%A7%80%ED%96%A5-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8DOOP-Object-Oriented-Programming-%EA%B0%9C%EB%85%90-%EB%B0%8F-%ED%99%9C%EC%9A%A9-%EC%A0%95%EB%A6%AC-igjyooyc6c

@@ -26,3 +26,25 @@
     - 논리적으로 격리되어 있지만 원할 때마다 고객의 네트워크와 간편히 연결할 수 있는 가상의 네트워크
 
 [Amazon EC2이란 무엇입니까? - Amazon Elastic Compute Cloud](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/concepts.html)
+
+
+---
+
+## + add
+
+# EC2 Auto Scaling
+
+- Auto Scailing을 사용하면 애플리케이션의 로드를 처리할 수 있는 정확한 수의 Amazon EC2 인스턴스를 유지할 수 있다
+- 오토 스케일링 EC2 인스턴스 모음을 생성
+    - 각 오토 스케일링의 최소/최대 인스턴스 수를 지정할 수 있으며, 그룹의 크기가 이 값 밖으로 벗어나지 않는다
+
+### Auto Scaling 구성 요소
+
+- 그룹
+    - EC2 인스턴스는 그룹 단위로 정리되어 조정 및 관리 목적의 논리적 단위로 처리할 수 있다
+    - 그룹 생성 시, EC2 인스턴스의 최소 및 최대 인스턴스 수와 원하는 인스턴스 수 지정
+- 구성 템플릿
+    - 인스턴스인 AMI ID, 인스턴스 유형, 키 페어, 보안 그룹, 블록 디바이스 매핑 등의 정보를 지정할 수 있다
+    - [시작 템플릿](https://docs.aws.amazon.com/ko_kr/autoscaling/ec2/userguide/launch-templates.html) 또는 ~~시작 구성~~ 으로 구성 템플릿 적용
+- 조정 옵션
+    - [다양한 옵션 확인](https://docs.aws.amazon.com/ko_kr/autoscaling/ec2/userguide/scale-your-group.html#scaling-options)

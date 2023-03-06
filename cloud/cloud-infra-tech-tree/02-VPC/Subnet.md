@@ -37,7 +37,17 @@ Subnet은 VPC의 IP 주소 범위이며, VPC로 AWS 리소스를 시작할 수 �
     
 
 ## 서브넷 설정
+- 모든 서브넷은 해당 서브넷에서 생성된 네트워크 인터페이스에 퍼블릭 IPv4 주소가 할당될 것인지 결정하는 속성을 가진다 (수정 가능)
+- 서브넷에서 인스턴스를 시작할 때, 인스턴스에 대해 생성된 메인 네트워크 인터페이스(eth0)가 포함
+- 서브넷 속성 상관없이, 특정 인스턴스를 시작하는 동안 해당 인스턴스에 서브넷을 설정할 수 있다
 
+### 수정 가능한 서브넷 설정
+
+- IP 설정 자동 할당
+    - 서브넷의 새 네트워크 인터페이스에 대한 퍼블릭 IPv4 또는 IPv6 주소를 자동으로 요청하도록 자동 할당 IP 설정을 구성할 수 있음
+- 리소스 기반 이름(RBN) 설정
+    - 서브넷에서 EC2 인스턴스에 대한 호스트 이름 유형을 지정하고, DNS A 및 AAAA 레코드 쿼리가 처리되는 방법을 구성할 수 있다
+    - [EC2 인스턴스 호스트 이름 유형](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html)
 
 
 [VPC의 서브넷 - Amazon Virtual Private Cloud](https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/configure-subnets.html)

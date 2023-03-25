@@ -49,5 +49,23 @@ Subnet은 VPC의 IP 주소 범위이며, VPC로 AWS 리소스를 시작할 수 �
     - 서브넷에서 EC2 인스턴스에 대한 호스트 이름 유형을 지정하고, DNS A 및 AAAA 레코드 쿼리가 처리되는 방법을 구성할 수 있다
     - [EC2 인스턴스 호스트 이름 유형](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html)
 
+## 서브넷 라우팅
+
+각 서브넷은 서브넷 외부로 나가는 아웃바운드 트래픽에 대해 허용된 경로를 지정하는 라우팅 테이블이 연결되어 있어야 한다
+
+생성된 각 서브넷은 자동으로 VPC의 기본 라우팅 테이블에 연결
+
+## 서브넷 보안
+
+AWS 리소스를 보호하려면 프라이빗 서브넷을 사용하는 것이 좋다
+
+Bastion 호스트 또는 NAT 디바이스를 사용하여 프라이빗 서브넷에 있는 EC2 인스턴스와 같은 리소스에 대한 인터넷 액세스를 제공
+
+AWS는 VPC에서 리소스에 대한 보안을 강화하기 위해 사용할 수 있는 기능을 제공
+
+- 보안 그룹 : EC2 인스턴스와 같은 관련 리소스에 대한 인바운드 및 아웃바운드 트래픽을 허용
+- 네트워크 ACL : 서브넷 수준에서 인바운드 및 아웃바운드 트래픽을 허용하거나 제어
+
+대부분의 경우 보안 그룹으로 사용자의 요구사항을 충족할 수 있다. 단,  추가 보안 계층을 원하는 경우 네트워크 ACL을 사용할 수 있다
 
 [VPC의 서브넷 - Amazon Virtual Private Cloud](https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/configure-subnets.html)

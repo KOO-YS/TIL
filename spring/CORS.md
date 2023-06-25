@@ -45,8 +45,25 @@
 --- 
 
 ### CORS 동작 방식 : Preflight Request
+- 브라우저에서 요청을 보낼 때, 
+    1. 예비 요청을 먼저 보내고 서버와 잘 통신되는지 확인한다
+    2. 예비 요청을 성공적으로 마치면 본 요청을 보낸다
+- 브라우저가 예비 요청을 보내는 것을 Preflight 라고 부르며, HTTP method `OPTIONS`를 사용한다
 
-
+#### Preflight API 요청 순서
+1. javascript fetch() 메소드 실행
+2. 브라우저가 서버로 [HTTP method `OPTIONS` : 예비요청] 을 보낸다
+    - [`Origin` : 본인 출처]
+    - [`Access-Control-Request-Method` : 실제 HTTP method]
+    - [`Access-Control-Request-Headers` : 실제 요청 Headers] 
+3. 서버가 요청에 응답
+    - [`Access-Control-Allow-Origin` : Origin 목록]
+    - [`Access-Control-Allow-Methods` : 허용 method 목록]
+    - [`Access-Control-Allow-Headers` : Header 목록]
+    - [`Access-Control-Max-Age` : 해당 예비 요청이 브라우저에 캐시될 수 있는 최대 시간(second)]
+4. 브라우저는 보낸 요청과 서버가 응답해준 정책 비교
+    - 만약 예비 요청이 안전하다고 확인된다면 서버에 본 요청을 보낸다
+5. 서버가 응답하면 이 값을 javascript 응답으로 넘겨준다
 
 ---
 

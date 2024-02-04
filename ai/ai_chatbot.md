@@ -20,7 +20,19 @@ AIaas 유형 : 챗봇
     - 데이터 분석에 강한 언어 중 하나
         -  NumPy, Pandas, Matplotlib, Scikit-learn 등 다양한 라이브러리와 모듈을 활용하여 데이터 처리와 분석을 수행할 수 있기 때문
     - Jupyter Notebook이라는 대화형 개발 도구를 제공하므로, 개발자들은 데이터를 시각화하고 분석하며, 결과를 공유하기 위해 보고서를 작성 가능
-- Streamlit
+- Streamlit- 
+    - 프론트엔드 개발 기술이 없는 개발자라도 python 만으로 웹 개발을 할 수 있는 기술 스택
+    - streamlit이 많은 부분을 추상화하여 제공하기 때문에 코드가 짧고 간결
+    - streamlit cloud는 github 레파지토리에 소스코드를 올려놓은 것 만으로 서비스를 배포할 수 있다
+    - 파이썬 기반이므로 기존 파이썬으로 개발된 데이터, AI 서비스 코드를 그대로 살리면서 개발할 수 있다 
+- faiss
+    - 
 
+
+
+[streamlit ref]
 https://modulabs.co.kr/blog/data-science-streamlit/
+https://blog.firstpenguine.school/97
 
+[faiss ref]
+https://dajeblog.co.kr/16-faiss%EC%97%90-%EB%8C%80%ED%95%9C-%EB%AA%A8%EB%93%A0-%EA%B2%83/

@@ -36,3 +36,21 @@ https://blog.firstpenguine.school/97
 
 [faiss ref]
 https://dajeblog.co.kr/16-faiss%EC%97%90-%EB%8C%80%ED%95%9C-%EB%AA%A8%EB%93%A0-%EA%B2%83/
+
+<hr>
+
+자체 정보 기반 검색 체계 
+1. Blob Storage 
+    - Blob Storage 내부 리소스인 Storage Account 네임스페이스를 생성 -> 이는 account 내부에 저장된 모든 개체에 고유 이름을 포함한 주소를 갖게 만든다
+    - ppt, pdf, word 등 다양한 자료를 스토리지에 업로드한다
+2. Cognitive Search
+    - Blob Storage 내 파일들을 연동해와서 페이지 단위로 쪼갠다
+    - 인지검색 리소스에서는 데이터를 쪼개고 이미지 글 추출이나 핵심 구문 추출 등 추가 기술을 사용해서 데이터 형태를 향상시킨다
+    - 최종적으로 데이터 형태를 index 형식으로 만들어 저장
+    - 이제 원본 데이터에 접근하는 것이 아닌 index 데이터에 쿼리를 날려 가장 유사한 답변을 받아온다
+3. Azure OpenAI
+
+
+[openai ref]
+https://www.youtube.com/live/_bxXFkDR_KA?si=ZK_YgtZuKkI_aOxY
+

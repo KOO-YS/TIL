@@ -52,8 +52,15 @@ https://dajeblog.co.kr/16-faiss%EC%97%90-%EB%8C%80%ED%95%9C-%EB%AA%A8%EB%93%A0-%
     - 최종적으로 데이터 형태를 index 형식으로 만들어 저장
     - 이제 원본 데이터에 접근하는 것이 아닌 index 데이터에 쿼리를 날려 가장 유사한 답변을 받아온다
 3. Azure OpenAI
+- GPT를 포함한 다양한 언어모델을 클라우드에서 사용할 수 있도록 Rest API 액세스를 제공
+- 인지 검색에서 응답받은 결과를 openAi의 GPT을 통해 사용자에게 전달할 답변을 생성
 
+자체 정보 데이터를 기반으로 GPT가 답변을 생성할 뿐이지 스스로 언어모델을 학습시키는 과정이 아니므로 파인튜닝과는 다르다
 
+RAG
+LLM
+
+ 
 [openai ref]
 https://www.youtube.com/live/_bxXFkDR_KA?si=ZK_YgtZuKkI_aOxY
 

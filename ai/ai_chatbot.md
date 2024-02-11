@@ -57,10 +57,18 @@ https://dajeblog.co.kr/16-faiss%EC%97%90-%EB%8C%80%ED%95%9C-%EB%AA%A8%EB%93%A0-%
 
 자체 정보 데이터를 기반으로 GPT가 답변을 생성할 뿐이지 스스로 언어모델을 학습시키는 과정이 아니므로 파인튜닝과는 다르다
 
-RAG
-LLM
-
  
 [openai ref]
 https://www.youtube.com/live/_bxXFkDR_KA?si=ZK_YgtZuKkI_aOxY
 
+
+RAG (Retrieval Argumented Generation)
+- LLM(Large Language Model) 언어모델과 문서검색기(retriever)의 통합
+- 검색 모델과 생성 모델을 통합하는 하이브리드 프레임워크 제공
+- 사용자 입력 쿼리에 기반하여 대량의 문서에서 관련 정보를 찾아내는 문서 검색기 활용 -> 찾아낸 정보를 기반으로 언어 모델이 텍스트 생성
+- 환각 감소 : 특정 도메인의 데이터를 가져와 환각을 줄이는데 도움이 된다
+
+LLM
+
+[RAG ref]
+https://techscene.tistory.com/entry/RAG%EC%99%80-LLM-%EA%B2%B0%ED%95%A9-%EC%9E%90%EC%97%B0%EC%96%B4-%EC%B2%98%EB%A6%AC%EC%9D%98-%EC%83%88%EB%A1%9C%EC%9A%B4-%EC%A7%80%ED%8F%89-Retrieval-Augmented-Generation

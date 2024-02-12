@@ -64,11 +64,20 @@ https://www.youtube.com/live/_bxXFkDR_KA?si=ZK_YgtZuKkI_aOxY
 
 RAG (Retrieval Argumented Generation)
 - LLM(Large Language Model) 언어모델과 문서검색기(retriever)의 통합
+- LLM은 일반적인 프롬프트에 빠른 속도로 응답하는데 유용하지만, 최신 주제나 특정 주제 같이 세부 사항을 파악하고 싶은 사용자에게는 적합하지 않을 수 있다
 - 검색 모델과 생성 모델을 통합하는 하이브리드 프레임워크 제공
 - 사용자 입력 쿼리에 기반하여 대량의 문서에서 관련 정보를 찾아내는 문서 검색기 활용 -> 찾아낸 정보를 기반으로 언어 모델이 텍스트 생성
 - 환각 감소 : 특정 도메인의 데이터를 가져와 환각을 줄이는데 도움이 된다
 
-LLM
+LLM (Large Language Model) 
+- 대규모 언어 데이터를 학습해 문장 구조나 문법, 의미, 단어 내 내재된 다른 의미 등을 이해하고 생성할 수 있다
+- 대표적으로 ChatGPT 존재
+- word embedding
+    - 단어의 의미를 숫자 형식으로 표현하는 데 사용
+    - 유사한 의미를 가진 단어가 서로 더 가깝게 위치하는 고차원 공간에서 단어를 벡터에 매핑하여 달성
+- Attention Mechanisms
+    - 입력 텍스트의 특정 부분에 가중치를 주고 처리하여 더 정확한 예측을 할 수 있다
+
 
 [RAG ref]
 https://techscene.tistory.com/entry/RAG%EC%99%80-LLM-%EA%B2%B0%ED%95%A9-%EC%9E%90%EC%97%B0%EC%96%B4-%EC%B2%98%EB%A6%AC%EC%9D%98-%EC%83%88%EB%A1%9C%EC%9A%B4-%EC%A7%80%ED%8F%89-Retrieval-Augmented-Generation

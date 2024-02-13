@@ -78,6 +78,11 @@ LLM (Large Language Model)
 - Attention Mechanisms
     - 입력 텍스트의 특정 부분에 가중치를 주고 처리하여 더 정확한 예측을 할 수 있다
 
+Sementic Search
+- 검색은 쿼리와 콘텐츠 간의 키워드 일치에 의존해왔다. 하지만 이 방식으로는 쿼리의 “의미”에 대해서 검색이 불가능
+- 자연어 처리를 통해 검색 쿼리의 내용과 콘텐츠를 이해
+- 쿼리와 인덱싱 콘텐츠 간에 정확하게 겹치는 단어가 없을 때에도 유사성 파악 가능
+
 
 [RAG ref]
 https://techscene.tistory.com/entry/RAG%EC%99%80-LLM-%EA%B2%B0%ED%95%A9-%EC%9E%90%EC%97%B0%EC%96%B4-%EC%B2%98%EB%A6%AC%EC%9D%98-%EC%83%88%EB%A1%9C%EC%9A%B4-%EC%A7%80%ED%8F%89-Retrieval-Augmented-Generation

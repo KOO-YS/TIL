@@ -20,6 +20,14 @@
 | Condition | Action을 언제 실행할지에 대한 조건 |
 | Action | 수행하려는 작업/동작 |
 
+- 추론 엔진 (Interface Engine)
+    0. 이해한대로 정리...
+    1. Match : 동일 조건 아래 둘 이상의 rule 이 충족될 수 있는 경우 생성
+    2. Resolve : Rule의 순서를 관리하며, 하나의 rule을 선택
+    3. Execute : 선택된 Rule에 따라 Action을 수행
+
+    - 전방 추론 (Forward Chaining) : 이용 가능한 정보로부터 출발하여 적절한 결론을 찾는 방법
+    - 후방 추론 (Backward Chaining) : 목표를 증명하는 증거를 역으로 찾아가는 방법 
 
 <hr>
 

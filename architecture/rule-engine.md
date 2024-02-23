@@ -31,6 +31,49 @@
 
 <hr>
 
+# Drools
+- 룰 엔진 오픈소스 
+- 사용자가 정의한 비즈니스 규칙이나 의사결정 모델을 실행하기 위해 데이터를 저장, 처리 및 평가
+
+### Examples
+운전 면허증 데이터 모델 활용 DRL 규칙
+
+운전 면허증 모델
+```java
+public class Applicant {
+  private String name;
+  private int age;
+  // Getter and setter methods
+}
+
+public class Application {
+  private Date dateApplied;
+  private boolean valid;
+  // Getter and setter methods
+}
+```
+
+DRL 규칙
+```
+package com.company.license
+
+rule "Is of valid age"
+when
+  Applicant(age < 18)
+  $a : Application()
+then
+  $a.setValid(false);
+end
+
+rule "Application was made this year"
+when
+  $a : Application(dateApplied > "01-jan-2009")
+then
+  $a.setValid(false);
+end
+```
+
+
 References
 - https://sketchit.tistory.com/entry/Rule-Engine
 - https://docs.drools.org/8.44.0.Final/drools-docs/drools/introduction/index.html

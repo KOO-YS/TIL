@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "arraylist": "*",
-    "express": "4.17.1",
+    "express": "4.19.2",
     "ejs": "*",
     "body-parser": "1.19.0",
     "cookie-parser": "1.4.5",

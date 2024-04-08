@@ -99,6 +99,78 @@
 > [도커 네트워크 참고](https://jonnung.dev/docker/2020/02/16/docker_network/) 
 
 
+---
+
+
+# Docker Summary
+
+### 소프트웨어 운영 플랫폼의 흐름
+
+> 하드웨어 가격은 내려가고 성능은 좋아진다. 
+> 운영 서비스는 대용량이 되어간다.
+ 
+
+1. 물리 서버 (Bare Metal) 
+   - 하나의 물리 서버에 다양한 서비스를 함께 관리
+   - 하나의 서버에 여러 서비스가 있어서 관리가 어려우며, 서로의 환경설정이 충돌할 가능성
+
+2. 가상화 기술 (Hypervisor)
+   - 하나의 서버에 가상 머신을 만들고 가상머신 안에 각 애플리케이션을 배포하고 운영
+   - 서비스 운영 관리가 쉬워졌으나, 서비스 환경에서는 Scale-In & Scale-Out가 요구되기 시작
+
+3. Container Engine
+   - OS 위에 컨테이너 엔진을 올려 플랫폼 역할을 하며 컨테이너 서비스들을 관리
+   - 컨테이너는 애플리케이션과 애플리케이션을 운영하기 위한 최소한의 환경만 포함되어 있기 때문에 용량이 적다
+   - 따로 분리되어 있는 환경과 쉽게 확장할 수 있는 구조
+
+### Linux와 관계
+- 도커는 리눅스 커널의 기능으로 구성되어있다
+- 도커가 활용한 리눅스 커널 기능
+  - chroot : 독립된 공간 형성
+  - namespace : 분리된 환경 지원
+  - cgroup : 필요한 만큼의 HW 지원
+
+### Docker 사용 이유
+- 과거 일반 애플리케이션의 경우 개발 환경과 실제 운영 환경이 달라 어려움이 있었다
+- 개발자가 개발한 그대로 운영환경에 배포할 수 있다
+- 확장성 : 요구사항에 맞춰 서비스의 확장, 축소가 쉬워졌다
+
+### 컨테이너와 컨테이너 이미지
+- Docker Host : Docker Daemon이 실행되고 있는 linux 커널이 있는 환경
+- container image(READ-ONLY) -> 실행 -> container (READ&WRITE) 
+- 컨테이너 이미지 레이어 예시
+    - base image
+    - source code
+    - execute command
+- hub에서 컨테이너 이미지 검색 후 실행 프로세스
+    ```shell
+    docker search nginx
+    docker pull nginx:lastet
+    docker run -d --name web -p 80:80 nginx:latest
+    ```
+
+### Docker 설치
+1. 사전 유틸 패키지 설치
+2. 인증서 등록
+3. URL 등록
+4. docker 설치
+    ```
+    docker-ce  # docker daemon
+    docker-ce-cli # docker client command
+    containerd.io # docker runtime engine
+    ```
+   
+
+### Docker 용어
+- Registry
+  - 도커 이미지를 관리하는 공간
+  - Docker Hub, Private Docker Hub, 회사 내부용 등
+  - default registry : Docker Hub
+- Repository
+  - 레지스트리 내에 도커 이미지가 저장되는 공간
+  - Github의 레파지토리와 비슷한 역할
+- Tag
+  - 같은 이미지 내 버전관리 용도
 
 
 

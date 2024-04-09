@@ -149,32 +149,78 @@
     docker run -d --name web -p 80:80 nginx:latest
     ```
 
+### Docker 저장소 용어
+- Registry
+    - 도커 이미지를 관리하는 공간
+    - Docker Hub, Private Docker Hub, 회사 내부용 등
+    - default registry : Docker Hub
+- Repository
+    - 레지스트리 내에 도커 이미지가 저장되는 공간
+    - Github의 레파지토리와 비슷한 역할
+- Tag
+    - 같은 이미지 내 버전관리 용도
+
+
 ### Docker 설치
+> https://docs.docker.com/engine/install/ubuntu/
 1. 사전 유틸 패키지 설치
-2. 인증서 등록
-3. URL 등록
+2. docker 공식 GPG 추가
+3. docker repository를 패키지 관리자에 추가
 4. docker 설치
     ```
-    docker-ce  # docker daemon
-    docker-ce-cli # docker client command
-    containerd.io # docker runtime engine
+      docker-ce  # docker daemon
+      docker-ce-cli # docker client command
+      containerd.io # docker runtime engine
     ```
-   
 
-### Docker 용어
-- Registry
-  - 도커 이미지를 관리하는 공간
-  - Docker Hub, Private Docker Hub, 회사 내부용 등
-  - default registry : Docker Hub
-- Repository
-  - 레지스트리 내에 도커 이미지가 저장되는 공간
-  - Github의 레파지토리와 비슷한 역할
-- Tag
-  - 같은 이미지 내 버전관리 용도
+### Docker 관리자 권한 부여
+- 바로 docker를 사용하려고 하면 permission denied가 발생
+- docker는 기본적으로 root 권한을 필요로 함
+- 그러나 root 권한을 사용하는 것은 daemon, container runtime에 잠재적 취약점이 있다
+- Docker Engine 19.03에 소개된 rootless mode을 사용해 non-root 방식으로 운영할 것을 권장
 
+### Docker 기본 명령어
 
+```shell
+# 컨테이너 상태 확인
+docker ps
 
+# 이미지를 사용해 컨테이너 생성 & 실행 
+docker run {image-name}
 
+# 기존에 중지되어 있었던 컨테이너 실행
+docker start {container-id} || {container-name}
+
+# 원격 저장소에 있는 이미지 내려받기
+docker pull {image-name}
+
+# 로컬에 저장된 이미지 확인
+docker image ls
+
+# 컨테이너 중지
+docker stop {container-id} || {container-name}
+
+# 이미지 삭제
+docker rmi {image-name}
+```
+
+### Dockerfile
+[dockerfile 페이지 참고](https://github.com/KOO-YS/TIL/blob/master/container/Dockerfile.md)
+
+#### Docker Layer 구분
+- hub에서 docker 컨테이너 이미지 불러오기
+    
+    ```shell
+    # 이미지 내려받기
+    docker search nginx
+    docker pull nginx
+  
+    # pull 받은 이미지는 다음 명령어로 확인 가능하다
+    docker image ls
+    ```
+- 이미지는 여러 레이어로 구성되어 있다
+    - root 계정의 `/var/lib/docker/overlay2`에 검색/불러오기 한 이미지의 레이어들이 저장되어 있다
+    - 레이어의 개수는 search/pull 실행한 이미지의 레이어 개수와 일치한다
 
 
 

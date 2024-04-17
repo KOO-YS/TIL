@@ -58,11 +58,17 @@
   - 같은 Pod 내부 Container 사이 : localhost로 통신 가능
   - 다른 Container의 Pod 끼리 :
     - Kube-Proxy : NAT 기술을 사용해 통신
+- Deployment(또는 ReplicaSet) 없이 생성한 Pod는 실패하거나 Node에서 제거되는 경우 다시 생성되지 않으므로 단독 생성 비추
+  - Deployment 로 생성하는 것이 일반적인 방법
+  - ReplicaSet의 기능을 가지면서 image 버전 업그레이드 시, Pod 역시 업그레이드를 해준다
+    - 업그레이드 정책 지정 가능 (default : Rolling)
+
 
 ---
 
 ### Namespace
 - dev, prod 등 환경을 분리하여 같은 이름의 리소스를 만들 수 있어서 유용하다
+- Node와는 연관없는 개념
 
 ---
 
@@ -79,3 +85,52 @@
 - ReplicaSet은 Pod를 배치시키지만 노드 사이에 균형을 갖춰서 배치시키지 않는다
 - 모든 노드에 1개 이상으로 골고루 배치시키기 위해서는 DaemonSet을 이용해야 한다
 - 로그, 모니터링에 사용
+
+---
+
+### Job
+- 배치성 일괄작업
+- Pod를 활용해서 일회성 또는 정기적인 작업 실행 -> 종료 후 실행 결과 공유
+  - 실행시킨 작업이 끝났다는 것을 확인할 수 있는 COMPLETIONS 컬럼
+    ```shell
+    $ kubectl get job
+    NAME        COMPLETIONS   DURATION  AGE
+    batch-pod   1/1           8s        10s
+    ```
+- [참고](https://malwareanalysis.tistory.com/151)
+
+### CronJob
+- 나중에 실행해야 하는 작업, 반복 일정에 따라 만들어진 Job
+
+---
+
+### Service
+- 내/외부 클라이언트 모두 일반적으로 Service를 통해 Pod에 연결
+- Sticky Session 가능
+- name 지정을 통해 port를 여러개 지정할 수 있다
+- Cluster 외부에 Service 노출
+  - NodePort : 클러스터 노드는 노드 자체의 포트를 열고 해당 포트에서 수신된 트래픽을 기본 서비스로 리다이렉션
+  - LoadBalancer : Kubernetes가 실행중인 클라우드 인프라에서 프로비저닝된 전용 로드밸런서를 통해 서비스에 액세스할 수 있다
+  - Ingress : 단일 IP 주소를 통해 여러 서비스를 노출하는 리소스. HTTP 수준(L7)에서 작동하므로 L4보다 더 많은 기능 제공 가능
+
+---
+
+### Volume
+- volume 종류
+  - emptyDir : 임시 데이터를 저장하는데 사용되는 빈 디렉토리 (저장되지 않는다)
+    - gitRepo(deprecated) : Git 저장소의 내용을 체크아웃하여 초기화된 볼륨이지만 현재 emptyDir을 활용 중
+  - hostPath : worker node의 파일시스템에서 Pod로 디렉토리를 마운트하는데 사용
+    - Pod가 죽고 살아났을때 기존 node에 Pod가 다시 생성될 것이란 보장이 없다
+  - Nfs : Network File System. pod에 마운트된 NFS share
+  - cephfs, iscsi, rbd 등 : 다른 유형의 네트워크 스토리지를 마운트 하는데 사용
+  - configMap, secret, downwardAPI : 특정 kubernetes 리소스 및 클러스터 정보를 Pod에 노출하는데 사용되는 특수 유형 볼륨
+  - persistent Volume, persistentVolume Claim : 정적, 동적으로 프로비저닝 된 영구 저장소를 사용하는 방법
+
+### Persistent Volume, Persistent Volume Claim
+- Pod와 개념을 분리하여 클러스터에서 관리될 수 있는 영구 저장소 풀 관리
+  - Pod에 볼륨을 직접 명시하지 않는 이유?
+    - 어떤 저장소를 쓰더라도 Pod 템플릿이 추상화되어 공통적으로 사용되어야한다
+    - Pod에는 저장소에 대한 Claim()만 지정하고, 저장소 관련 정보는 분리하여 관리한다
+- 마운트 경로, 용량, 호스트에 마운트되는 방법 등을 정의
+
+---

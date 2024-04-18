@@ -81,6 +81,27 @@
 
 ---
 
+### Update
+- Deployment 리소스가 나오기 이전 ReplicationController를 이용하여 Rolling Update 방식을 사용하였다
+  ```
+  # 이미지 버전 업그레이드
+  kubectl rolling-update <app-v1> <app-v2> --image=nginx:v2
+  ``` 
+- Rolling Update 중 구분을 위한 자체 라벨링 
+- 
+
+### Deployment
+ - ReplicaSet의 상위 호환
+ - ReplicaSet와 다른점
+   - 업데이트 전략 지정 가능
+     - Rolling Update (default) : Pod를 순차적으로 지정된 수량만큼만 업데이트
+     - Recreate : 기존 리소스를 한번에 삭제한 다음 새로운 Pod를 생성해서 순간적인 서비스 단절 가능성 
+```shell
+kubectl set image deployment nginx=nginx:v2
+```
+
+---
+
 ### DaemonSet
 - ReplicaSet은 Pod를 배치시키지만 노드 사이에 균형을 갖춰서 배치시키지 않는다
 - 모든 노드에 1개 이상으로 골고루 배치시키기 위해서는 DaemonSet을 이용해야 한다
@@ -132,5 +153,40 @@
     - 어떤 저장소를 쓰더라도 Pod 템플릿이 추상화되어 공통적으로 사용되어야한다
     - Pod에는 저장소에 대한 Claim()만 지정하고, 저장소 관련 정보는 분리하여 관리한다
 - 마운트 경로, 용량, 호스트에 마운트되는 방법 등을 정의
+- 
+---
+
+### ConfigMap
+- Kubernetes의 template에 'env'로 사용하던 환경변수들을 관리 체계화한 리소스
+- key-value 쌍을 포함하는 map
+- volume 리소스의 한 형태
+
+### Secret
+- 보안을 유지해야 하는 자격증명, 개인 암호화 키같은 민감한 구성정보
+- base64 형식으로 저장
+- Node에서 항상 메모리에 저장되며 물리적 스토리지에 기록되지 않는다
+
+### downwardAPI
+- Pod 생성 이후 만들어진 metadata 정보를 Pod 내부 Container로 전달
+- Pod 이름, IP 주소, Namespace, 속한 Node, Service Account, CPU & Memory Request, Limit
 
 ---
+
+### StatefulSet
+- ReplicaSet의 Pod는 지정 이름이 없으며 언제든지 대체 가능
+- Stateful의 Pod는 지정 이름이 있으며 같은 모양으로 대체해야 함
+- 새 인스턴스는 교체할 인스턴스와 동일한 이름, 네트워크 ID 및 상태를 가져가야함
+- 스케일을 확장하면 직렬로 하나씩 생성이된다
+- Pod가 삭제되더라도 PV, PVC를 삭제하지 않고 유지하며, 다시 생성되면 같은 Pod를 찾아서 연동한다
+- 
+
+---
+
+### ServiceAccount
+- AWS Role 기능과 유사
+- kubernetes 서비스 리소스의 권한을 설정
+- 각 namespace에 대해 default 서비스어카운트가 자동 생성되어 모든 namespace에는 기본 sa가 존재
+- pod는 하나의 sa와 연결되어야 한다 (n:1)
+- pod는 동일 namespace의 sa만 사용 가능
+- 
+

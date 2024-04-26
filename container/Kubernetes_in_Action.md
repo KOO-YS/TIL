@@ -188,5 +188,70 @@ kubectl set image deployment nginx=nginx:v2
 - 각 namespace에 대해 default 서비스어카운트가 자동 생성되어 모든 namespace에는 기본 sa가 존재
 - pod는 하나의 sa와 연결되어야 한다 (n:1)
 - pod는 동일 namespace의 sa만 사용 가능
-- 
 
+
+
+---
+
+### K8S Context
+- 멀티 클러스터 관리
+- kubectl을 이용하여 클러스터, 네임스페이스를 구분하여 작업 가능
+
+#### `~/.kube/config` 파일 구성
+```yaml
+apiVersion: v1
+clusters: # 생성한 클러스터 목록 
+- cluster: # 각 클러스터 정보
+    insecure-skip-tls-verify: true
+    server: https://localhost:6443
+  name: local-cluster
+- cluster:
+    certificate-authority-data: ~~~~
+    server: https://xxx.xxx.xxx.xxx
+  name: sample-cluster
+
+users:  # 사용자 권한 정보
+- name: local-user
+  user:
+    blah blah
+- name: sample-user
+  user:
+    blah blah
+
+contexts: # 어떤 사용자가 어떤 클러스터를 사용할 수 있는지 정의
+- context:
+    cluster: sample-cluster
+    user: sample-user
+  name: sample-context
+- context:
+    cluster: local-cluster
+    user: local-user
+  name: local-context
+
+current-context: sample-context # 현재 사용하고 있는 context
+
+kind: Config # 설정 파일이라는 의미
+preferences: {}
+```
+
+#### context 명령어
+```shell
+# context 조회
+kubectl config get-contexts
+
+# output
+# CURRENT   NAME      CLUSTER                           AUTHINFO                                      NAMESPACE
+#           local     local-cluster                     local-user
+# *         sample    sample-cluster                    sample-user
+
+# context 변경
+kubectl config use-context local-context
+```
+
+---
+
+### Storage Class
+- 기존에는 PV의 불편함 개선
+  - PVC로 볼륨 요청은 쉽지만, 운영 입장에서는 PV로 사용할 볼륨을 수동으로 프로비저닝 해야함
+- 동적으로 디스크의 타입을 정의하고 생성하는 프로비저닝 방식
+  - PVC에서 스토리지 클래스를 지정하면 이에 맞는 디스크 생성

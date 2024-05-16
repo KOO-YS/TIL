@@ -388,6 +388,10 @@ daemon 은 start, stop 명령어로 켜고 끌 수 있다
 
 > tail -f date.log
 
+###### crontab 실행 로그 확인
+```
+tail -f /var/log/syslog | grep CRON
+```
 
 
 

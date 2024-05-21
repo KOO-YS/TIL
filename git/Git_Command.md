@@ -243,6 +243,13 @@
   find ./ -name ".git" | xargs rm -Rf
   ```
 
+새 원격저장소 정보를 추가
+```
+git remote add origin <git-url>
+
+# 확인
+git remote -v
+```
 
 
 ## Stash

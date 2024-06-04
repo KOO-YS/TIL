@@ -229,7 +229,7 @@ kind를 파드로 정의한 매니페스트 파일로는 파드를 하나밖에 
 
 **레플리카세트** : 똑같은 정의를 갖는 파드를 여러 개 생성하고 관리하기 위한 리소스
 
-```yaml
+```
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
@@ -397,6 +397,11 @@ spec:
 
 
 ----
+
+#### kubectl 쉘 자동완성
+- bash_completion 설정 필요
+
+[reference](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#enable-shell-autocompletion)
 
 
 <br>

@@ -223,7 +223,27 @@ docker rmi {image-name}
     - 레이어의 개수는 search/pull 실행한 이미지의 레이어 개수와 일치한다
 
 
+### Docker Multi Stage Build 
 
+- Docker 기반이미지의 크기가 클때 활용
+- 여러 컨테이너 이미지를 사용해 빌드를 처리하고 결과물만 실행을 위한 컨테이너 이미지에 복사하는 구조
+  - 컴파일러가 애플리케이션 컴파일에만 필요하고 실행에는 필요가 없는 경우
+
+```
+# stage 1 : 컴파일용 이미지
+FROM golang as builder
+
+RUN 빌드 명령어
+
+# stage 2 : 컴파일된 바이너리를 포함한 실행용 컨테이너용 이미지
+FROM alpine
+
+COPY --from=builder 빌드 결과물 파일
+
+실행명령어
+```
+
++ Buildkit : 빌드 단계의 의존관계를 자동으로 파악하고 빌드 단계를 병렬 처리하는 것이 가능
 
 
 
